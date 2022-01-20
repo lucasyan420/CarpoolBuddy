@@ -4,9 +4,15 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="app/src/main/res/layout/activity_add_vehicle.xml" value="0.2365496049724021" />
-        <entry key="app/src/main/res/layout/activity_auth.xml" value="0.43782345069862355" />
+        <entry key="app/src/main/res/layout/activity_alumni_sign_up.xml" value="0.20969202898550723" />
+        <entry key="app/src/main/res/layout/activity_auth.xml" value="0.26998049819438347" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.23790513243121056" />
         <entry key="app/src/main/res/layout/activity_main2.xml" value="0.19972826086956522" />
+        <entry key="app/src/main/res/layout/activity_parent_sign_up.xml" value="0.2056159420289855" />
+        <entry key="app/src/main/res/layout/activity_sign_up.xml" value="0.2682291666666667" />
+        <entry key="app/src/main/res/layout/activity_sign_up_profile.xml" value="0.3753508621412795" />
+        <entry key="app/src/main/res/layout/activity_student_sign_up.xml" value="0.213768115942029" />
+        <entry key="app/src/main/res/layout/activity_teacher_sign_up.xml" value="0.2723318012190206" />
         <entry key="app/src/main/res/layout/activity_user_profile.xml" value="0.2418478260869565" />
         <entry key="app/src/main/res/layout/activity_vehicles_info.xml" value="0.2418478260869565" />
       </map>

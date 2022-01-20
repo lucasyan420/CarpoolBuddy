@@ -10,7 +10,19 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.CarpoolBuddy">
         <activity
-            android:name=".signUpActivity"
+            android:name=".ParentSignUpActivity"
+            android:exported="true" />
+        <activity
+            android:name=".TeacherSignUpActivity"
+            android:exported="true" />
+        <activity
+            android:name=".AlumniSignUpActivity"
+            android:exported="true" />
+        <activity
+            android:name=".StudentSignUpActivity"
+            android:exported="true" />
+        <activity
+            android:name=".SignUpProfile"
             android:exported="true" />
         <activity
             android:name=".VehicleProfileActivity"
@@ -35,7 +47,7 @@
         </activity>
         <activity
             android:name=".MainActivity"
-            android:exported="true"></activity>
+            android:exported="true" />
     </application>
 
 </manifest>

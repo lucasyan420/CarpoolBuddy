@@ -36,33 +36,35 @@
 
     <Button
         android:id="@+id/logInButton_authActivity"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
+        android:layout_width="150dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="30dp"
         android:onClick="logIn"
         android:text="Log In"
-        app:layout_constraintStart_toStartOf="@+id/passwordEditText_authActivity"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/passwordEditText_authActivity" />
 
     <Button
         android:id="@+id/signUpButton_authactivity"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
+        android:layout_width="150dp"
+        android:layout_height="50dp"
+        android:layout_marginEnd="40dp"
+        android:layout_marginBottom="100dp"
         android:onClick="signUp"
         android:text="Sign Up"
-        app:layout_constraintEnd_toEndOf="@+id/passwordEditText_authActivity"
-        app:layout_constraintTop_toBottomOf="@+id/passwordEditText_authActivity" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
 
     <Button
         android:id="@+id/testButton_authActivity"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="150dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="40dp"
         android:layout_marginBottom="100dp"
         android:onClick="test"
         android:text="Test"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

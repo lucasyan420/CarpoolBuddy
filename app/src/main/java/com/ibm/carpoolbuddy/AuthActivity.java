@@ -25,9 +25,6 @@ public class AuthActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private FirebaseFirestore firestore;
 
-    private String selected;
-    private Spinner sUserType;
-
     private EditText emailEditText;
     private EditText passwordEditText;
 
@@ -76,34 +73,12 @@ public class AuthActivity extends AppCompatActivity {
                 }
             }
         });
-
-
-
-
     }
 
     public void signUp(View v)
     {
-        System.out.println("Sign up test");
-        String emailString = emailEditText.getText().toString();
-        String passwordString = passwordEditText.getText().toString();
-        System.out.println(String.format("email: %s and password: %s", emailString, passwordString));
-
-        mAuth.createUserWithEmailAndPassword(emailString, passwordString).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-            @Override
-            public void onComplete(@NonNull Task<AuthResult> task) {
-                if(task.isSuccessful()) {
-                    Log.d("SIGN UP", "Successfully signed up the user");
-
-                    FirebaseUser user = mAuth.getCurrentUser();
-                    updateUI(user);
-                }
-                else {
-                    Log.w("SIGN UP", "createUserWithEmail:failure", task.getException());
-                    updateUI(null);
-                }
-            }
-        });
+        Intent goToSignUpProfileIntent = new Intent(this, SignUpProfile.class);
+        startActivity(goToSignUpProfileIntent);
     }
 
     public void logOut(View v)
