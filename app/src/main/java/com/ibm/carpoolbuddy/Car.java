@@ -4,26 +4,26 @@ import java.util.*;
 public class Car extends Vehicle{
     private int range;
     private int fuelCapacity;
-    private String safetyReview;
+    private String safetyRating;
 
     public Car()
     {
 
     }
 
-    public Car(int range, int fuelCapacity, String safetyReview)
+    public Car(int range, int fuelCapacity, String safetyRating)
     {
         this.range = range;
         this.fuelCapacity = fuelCapacity;
-        this.safetyReview = safetyReview;
+        this.safetyRating = safetyRating;
     }
 
-    public Car(String owner, String brand, String model, int capacity, String vehicleIDs, ArrayList<String> ridersUIDs, boolean open, String vehicleType, double basePrice, int range, int fuelCapacity, String safetyReview)
+    public Car(String ownerID, String brand, String model, int capacity, String vehicleIDs, ArrayList<String> ridersUIDs, boolean open, String vehicleType, double basePrice, int range, int fuelCapacity, String safetyRating)
     {
-        super(owner, brand, model, capacity, vehicleIDs, ridersUIDs, open, vehicleType, basePrice);
+        super(ownerID, brand, model, capacity, vehicleIDs, ridersUIDs, open, vehicleType, basePrice);
         this.range = range;
         this.fuelCapacity = fuelCapacity;
-        this.safetyReview = safetyReview;
+        this.safetyRating = safetyRating;
     }
 
     public int getRange() {
@@ -43,17 +43,17 @@ public class Car extends Vehicle{
     }
 
     public String getSafetyReview() {
-        return safetyReview;
+        return safetyRating;
     }
 
     public void setSafetyReview(String safetyReview) {
-        this.safetyReview = safetyReview;
+        this.safetyRating = safetyReview;
     }
 
     @Override
     public String toString() {
         return "Vehicle: \n" +
-                "Owner = " + getOwner() +
+                "OwnerID = " + getOwnerID() +
                 "Brand = " + getBrand() +
                 ", Model = " + getModel() +
                 ", Capacity = " + getCapacity() +
@@ -64,6 +64,6 @@ public class Car extends Vehicle{
                 ", Base Price = " + getBasePrice() +
                 ", Range = " + range +
                 ", Fuel Capacity = " + fuelCapacity +
-                ", Safety Review = " + safetyReview;
+                ", Safety Review = " + safetyRating;
     }
 }

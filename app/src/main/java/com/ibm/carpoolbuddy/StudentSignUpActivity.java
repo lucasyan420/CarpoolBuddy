@@ -13,7 +13,10 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.*;
 
@@ -25,6 +28,9 @@ public class StudentSignUpActivity extends AppCompatActivity {
     private EditText graduationYearEditText;
     private EditText emailEditText;
     private EditText passwordEditText;
+    private EditText parentNameEditText;
+
+    private ArrayList<String> parentIDs = new ArrayList<String>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +44,7 @@ public class StudentSignUpActivity extends AppCompatActivity {
         graduationYearEditText = findViewById(R.id.graduationYearEditText_studentSignUpActivity);
         emailEditText = findViewById(R.id.emailEditText_studentSignUpActivity);
         passwordEditText = findViewById(R.id.passwordEditText_studentSignUpActivity);
+        parentNameEditText = findViewById(R.id.parentNameEditText_studentSignUpActivity);
     }
 
     public void signUp(View v){
@@ -53,16 +60,13 @@ public class StudentSignUpActivity extends AppCompatActivity {
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if(task.isSuccessful()){
                     Log.d("Test", "Successfully signed up the user");
-
-                    Student student = new Student(UUID.randomUUID().toString(), nameString, emailString, "Student", 1, null, graduationYear, null);
+                    Student student = new Student(UUID.randomUUID().toString(), nameString, emailString, "Student", 1, null, graduationYear, parentIDs);
                     try {
-//                        firestore.collection("AllUsers/students").document(student.getUid()).set(student);
                         firestore.collection("AllObjects/AllUsers/students").document(student.getUid()).set(student);
                     } catch (Exception e) {
                         e.printStackTrace();
-
                     }
-                    Log.d("Test", "Test3");
+                    updateFamilyRelationships();
                     goBack();
                 }
                 else {
@@ -70,6 +74,45 @@ public class StudentSignUpActivity extends AppCompatActivity {
                 }
             }
         });
+    }
+
+    public void updateFamilyRelationships(){
+        updateParentID();
+
+        String nameString = nameEditText.getText().toString();
+
+        firestore.collection("AllObjects/AllUsers/students").whereEqualTo("name", nameString).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                String id = task.getResult().getDocuments().get(0).getId();
+
+                updateStudent(id);
+            }
+        });
+    }
+
+    public void updateParentID(){
+        String parentNameString = parentNameEditText.getText().toString();
+
+        firestore.collection("AllObjects/AllUsers/parents").whereEqualTo("name", parentNameString).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                if (task.isSuccessful()) {
+                    for (QueryDocumentSnapshot document : task.getResult()) {
+                        Log.d("Test", document.getId() + " => " + document.getData());
+                        parentIDs.add(document.getId());
+                    }
+                }
+                else {
+                    Log.d("Test", "Error getting documents: ", task.getException());
+                }
+            }
+        });
+    }
+
+    public void updateStudent(String id)
+    {
+        firestore.collection("AllObjects/AllUsers/students/").document(id).update("parentUIDs", parentIDs);
     }
 
     public void goBack(){

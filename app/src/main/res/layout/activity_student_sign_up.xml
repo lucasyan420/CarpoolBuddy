@@ -33,19 +33,6 @@
         app:layout_constraintTop_toBottomOf="@+id/nameEditText_studentSignUpActivity" />
 
     <EditText
-        android:id="@+id/emailEditText_studentSignUpActivity"
-        android:layout_width="200dp"
-        android:layout_height="50dp"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="25dp"
-        android:ems="10"
-        android:hint="johndoe@gmail.com"
-        android:inputType="textPersonName"
-        android:textSize="18dp"
-        app:layout_constraintStart_toEndOf="@+id/emailTextView_studentSignUpActivity"
-        app:layout_constraintTop_toBottomOf="@+id/graduationYearEditText_studentSignUpActivity" />
-
-    <EditText
         android:id="@+id/passwordEditText_studentSignUpActivity"
         android:layout_width="200dp"
         android:layout_height="50dp"
@@ -57,6 +44,19 @@
         android:textSize="18dp"
         app:layout_constraintStart_toEndOf="@+id/passwordTextView_studentSignUpActivity"
         app:layout_constraintTop_toBottomOf="@+id/emailEditText_studentSignUpActivity" />
+
+    <EditText
+        android:id="@+id/parentNameEditText_studentSignUpActivity"
+        android:layout_width="200dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="25dp"
+        android:ems="10"
+        android:hint="Mary Doe"
+        android:inputType="textPersonName"
+        android:textSize="18dp"
+        app:layout_constraintStart_toEndOf="@+id/parentNameTextView_studentSignUpActivity"
+        app:layout_constraintTop_toBottomOf="@+id/passwordEditText_studentSignUpActivity" />
 
     <TextView
         android:id="@+id/nameTextView_studentSignUpActivity"
@@ -100,6 +100,19 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/graduationYearTextView_studentSignUpActivity" />
 
+    <EditText
+        android:id="@+id/emailEditText_studentSignUpActivity"
+        android:layout_width="200dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="25dp"
+        android:ems="10"
+        android:hint="johndoe@gmail.com"
+        android:inputType="textPersonName"
+        android:textSize="18dp"
+        app:layout_constraintStart_toEndOf="@+id/emailTextView_studentSignUpActivity"
+        app:layout_constraintTop_toBottomOf="@+id/graduationYearEditText_studentSignUpActivity" />
+
     <TextView
         android:id="@+id/passwordTextView_studentSignUpActivity"
         android:layout_width="120dp"
@@ -113,6 +126,20 @@
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/emailTextView_studentSignUpActivity" />
+
+    <TextView
+        android:id="@+id/parentNameTextView_studentSignUpActivity"
+        android:layout_width="150dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="25dp"
+        android:gravity="center|center_vertical"
+        android:text="Parent Name:"
+        android:textAlignment="center"
+        android:textSize="24dp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/passwordTextView_studentSignUpActivity" />
 
     <TextView
         android:id="@+id/signUpTextView_studentSignUpActivity"
@@ -145,11 +172,11 @@
         android:id="@+id/signUpButton_studentSignUpActivity"
         android:layout_width="150dp"
         android:layout_height="50dp"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="25dp"
         android:onClick="signUp"
         android:text="Sign Up"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/passwordEditText_studentSignUpActivity" />
+        app:layout_constraintTop_toBottomOf="@+id/parentNameTextView_studentSignUpActivity" />
 </androidx.constraintlayout.widget.ConstraintLayout>

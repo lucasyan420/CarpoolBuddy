@@ -2,7 +2,7 @@ package com.ibm.carpoolbuddy;
 import java.util.*;
 
 public class Vehicle {
-    private String owner;
+    private String ownerID;
     private String brand;
     private String model;
     private int capacity;
@@ -17,8 +17,8 @@ public class Vehicle {
 
     }
 
-    public Vehicle(String owner, String brand, String model, int capacity, String vehicleID, ArrayList<String> ridersUIDs, boolean open, String vehicleType, double basePrice) {
-        this.owner = owner;
+    public Vehicle(String ownerID, String brand, String model, int capacity, String vehicleID, ArrayList<String> ridersUIDs, boolean open, String vehicleType, double basePrice) {
+        this.ownerID = ownerID;
         this.brand = brand;
         this.model = model;
         this.capacity = capacity;
@@ -29,12 +29,12 @@ public class Vehicle {
         this.basePrice = basePrice;
     }
 
-    public String getOwner() {
-        return owner;
+    public String getOwnerID() {
+        return ownerID;
     }
 
-    public void setOwner(String owner) {
-        this.owner = owner;
+    public void setOwnerID(String owner) {
+        this.ownerID = ownerID;
     }
 
     public String getBrand() { return brand; }
@@ -100,7 +100,7 @@ public class Vehicle {
     @Override
     public String toString() {
         return "Vehicle: \n" +
-                "Owner = " + owner +
+                "OwnerID = " + ownerID +
                 "Brand = " + brand +
                 ", Model = " + model +
                 ", Capacity = " + capacity +
