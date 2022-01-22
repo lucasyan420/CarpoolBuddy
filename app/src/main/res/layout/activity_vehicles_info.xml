@@ -6,15 +6,40 @@
     android:layout_height="match_parent"
     tools:context=".VehiclesInfoActivity">
 
+    <TextView
+        android:id="@+id/vehiclesInfoTextView_vehiclesInfoActivity"
+        android:layout_width="250dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="25dp"
+        android:fontFamily="monospace"
+        android:text="Vehicles Info"
+        android:textAlignment="center"
+        android:textSize="30dp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <Button
         android:id="@+id/backButton_vehiclesInfoActivity"
         android:layout_width="150dp"
         android:layout_height="50dp"
-        android:layout_marginBottom="100dp"
+        android:layout_marginBottom="25dp"
         android:onClick="goBack"
         android:text="Back"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerView_vehiclesInfoActivity"
+        android:layout_width="380dp"
+        android:layout_height="530dp"
+        android:layout_marginTop="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/vehiclesInfoTextView_vehiclesInfoActivity" />
 </androidx.constraintlayout.widget.ConstraintLayout>
