@@ -18,6 +18,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.UUID;
 
@@ -27,6 +28,8 @@ public class AuthActivity extends AppCompatActivity {
 
     private EditText emailEditText;
     private EditText passwordEditText;
+
+    private String id;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,22 +43,13 @@ public class AuthActivity extends AppCompatActivity {
         passwordEditText = findViewById(R.id.passwordEditText_authActivity);
     }
 
-    @Override
-    protected void onStart()
-    {
-        super.onStart();
-        FirebaseUser currentUser = mAuth.getCurrentUser();
-        if(currentUser != null){
-            updateUI(currentUser);
-        }
-    }
-
     public void logIn(View v)
     {
         System.out.println("Log in test");
         String emailString = emailEditText.getText().toString();
         String passwordString = passwordEditText.getText().toString();
         System.out.println(String.format("email: %s and password: %s", emailString, passwordString));
+//        findCurrentID();
 
         mAuth.signInWithEmailAndPassword(emailString, passwordString).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
             @Override
@@ -65,6 +59,7 @@ public class AuthActivity extends AppCompatActivity {
 
                     FirebaseUser user = mAuth.getCurrentUser();
 
+                    System.out.println("Test: " + id);
                     updateUI(user);
                 }
                 else {
@@ -74,6 +69,30 @@ public class AuthActivity extends AppCompatActivity {
             }
         });
     }
+
+//    public void findCurrentID(){
+//        String emailString = emailEditText.getText().toString();
+//
+//        firestore.collection("AllObjects/AllUsers/students").whereEqualTo("email", emailString).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+//            @Override
+//            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+//                id = task.getResult().getDocuments().get(0).getId();
+//                System.out.println("Third test: " + id);
+//            }
+//        });
+        // firestore.collection("AllObjects/AllUsers/students").document(mAuth.getCurrentUser().getUid()).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+        // @Override
+        // public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+        // if(task.isSuccessful() && task.getResult() != null){
+        //    String userId = task.getResult().getString("uid");
+        //    System.out.println("Second test: " + userId);
+        // }
+        // else{
+        //    Log.d("Fail", "Fail");
+        // }
+        // }
+        // });
+//    }
 
     public void signUp(View v)
     {

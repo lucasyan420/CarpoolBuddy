@@ -57,7 +57,7 @@ public class Vehicle {
         this.capacity = capacity;
     }
 
-    public String getVehicleIDs() {
+    public String getVehicleID() {
         return vehicleID;
     }
 
@@ -104,7 +104,7 @@ public class Vehicle {
                 "Brand = " + brand +
                 ", Model = " + model +
                 ", Capacity = " + capacity +
-                ", Vehicle IDs = " + vehicleID +
+                ", Vehicle ID = " + vehicleID +
                 ", Riders User IDs = " + ridersUIDs +
                 ", Open = " + open +
                 ", Vehicle Type = " + vehicleType +

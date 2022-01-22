@@ -18,8 +18,8 @@ public class Motorcycle extends Vehicle{
         this.length = length;
     }
 
-    public Motorcycle(String ownerID, String brand, String model, int capacity, String vehicleIDs, ArrayList<String> ridersUIDs, boolean open, String vehicleType, double basePrice, int weight, int length, String seatType) {
-        super(ownerID, brand, model, capacity, vehicleIDs, ridersUIDs, open, vehicleType, basePrice);
+    public Motorcycle(String ownerID, String brand, String model, int capacity, String vehicleID, ArrayList<String> ridersUIDs, boolean open, String vehicleType, double basePrice, int weight, int length, String seatType) {
+        super(ownerID, brand, model, capacity, vehicleID, ridersUIDs, open, vehicleType, basePrice);
         this.weight = weight;
         this.length = length;
         this.seatType = seatType;
@@ -56,7 +56,7 @@ public class Motorcycle extends Vehicle{
                 "Brand = " + getBrand() +
                 ", Model = " + getModel() +
                 ", Capacity = " + getCapacity() +
-                ", Vehicle IDs = " + getVehicleIDs() +
+                ", Vehicle ID = " + getVehicleID() +
                 ", Riders User IDs = " + getRidersUIDs() +
                 ", Open = " + isOpen() +
                 ", Vehicle Type = " + getVehicleType() +

@@ -15,6 +15,7 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.util.ArrayList;
 import java.util.UUID;
 
 public class AlumniSignUpActivity extends AppCompatActivity {
@@ -25,6 +26,8 @@ public class AlumniSignUpActivity extends AppCompatActivity {
     private EditText graduationYearEditText;
     private EditText emailEditText;
     private EditText passwordEditText;
+
+    private ArrayList<String> ownedVehicles = new ArrayList<String>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,7 +58,7 @@ public class AlumniSignUpActivity extends AppCompatActivity {
                 if(task.isSuccessful()){
                     Log.d("Test", "Successfully signed up the user");
 
-                    Alumni alumni = new Alumni(UUID.randomUUID().toString(), nameString, emailString, "Alumni", 1, null, graduationYear);
+                    Alumni alumni = new Alumni(UUID.randomUUID().toString(), nameString, emailString, "Alumni", 1, ownedVehicles, graduationYear);
                     try {
 //                        firestore.collection("AllUsers/students").document(student.getUid()).set(student);
                         firestore.collection("AllObjects/AllUsers/alums").document(alumni.getUid()).set(alumni);

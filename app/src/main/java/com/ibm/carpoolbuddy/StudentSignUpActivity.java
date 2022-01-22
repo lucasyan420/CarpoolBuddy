@@ -35,6 +35,7 @@ public class StudentSignUpActivity extends AppCompatActivity {
     private String id;
 
     private ArrayList<String> parentIDs = new ArrayList<String>();
+    private ArrayList<String> ownedVehicles = new ArrayList<String>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,7 +65,7 @@ public class StudentSignUpActivity extends AppCompatActivity {
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if(task.isSuccessful()){
                     Log.d("Test", "Successfully signed up the user");
-                    Student student = new Student(UUID.randomUUID().toString(), nameString, emailString, "Student", 1, null, graduationYear, parentIDs);
+                    Student student = new Student(UUID.randomUUID().toString(), nameString, emailString, "Student", 1, ownedVehicles, graduationYear, parentIDs);
                     try {
                         firestore.collection("AllObjects/AllUsers/students").document(student.getUid()).set(student);
                     } catch (Exception e) {
