@@ -14,6 +14,8 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
@@ -29,6 +31,8 @@ public class StudentSignUpActivity extends AppCompatActivity {
     private EditText emailEditText;
     private EditText passwordEditText;
     private EditText parentNameEditText;
+
+    private String id;
 
     private ArrayList<String> parentIDs = new ArrayList<String>();
 
@@ -66,7 +70,7 @@ public class StudentSignUpActivity extends AppCompatActivity {
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
-                    updateFamilyRelationships();
+                    updateStudentRelationships();
                     goBack();
                 }
                 else {
@@ -76,7 +80,7 @@ public class StudentSignUpActivity extends AppCompatActivity {
         });
     }
 
-    public void updateFamilyRelationships(){
+    public void updateStudentRelationships(){
         updateParentID();
 
         String nameString = nameEditText.getText().toString();
@@ -84,12 +88,13 @@ public class StudentSignUpActivity extends AppCompatActivity {
         firestore.collection("AllObjects/AllUsers/students").whereEqualTo("name", nameString).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                String id = task.getResult().getDocuments().get(0).getId();
+                id = task.getResult().getDocuments().get(0).getId();
 
-                updateStudent(id);
+                updateRelationships(id);
             }
         });
     }
+
 
     public void updateParentID(){
         String parentNameString = parentNameEditText.getText().toString();
@@ -110,9 +115,15 @@ public class StudentSignUpActivity extends AppCompatActivity {
         });
     }
 
-    public void updateStudent(String id)
+    public void updateRelationships(String id)
     {
+        //Update this student's parentUIDs with the parentIDs array
         firestore.collection("AllObjects/AllUsers/students/").document(id).update("parentUIDs", parentIDs);
+        //For each parent in parentIDs array, will update childrenUIDs of the parent with this student's id
+        for(String parents: parentIDs)
+        {
+            firestore.collection("AllObjects/AllUsers/parents/").document(parents).update("childrenUIDs", FieldValue.arrayUnion(id));
+        }
     }
 
     public void goBack(){
