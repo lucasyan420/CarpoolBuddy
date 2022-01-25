@@ -15,11 +15,30 @@ public class vehiclesAdapter extends RecyclerView.Adapter<vehiclesViewHolder> {
     ArrayList<String> prices;
     ArrayList<String> seatsLeft;
 
-    public vehiclesAdapter(ArrayList inputLocations, ArrayList inputDescriptions, ArrayList inputPrices, ArrayList inputSeatsLeft){
+    private RecyclerViewClickListener listener;
+
+    public vehiclesAdapter(){
+
+    }
+
+    public vehiclesAdapter(ArrayList inputLocations, ArrayList inputDescriptions, ArrayList inputPrices, ArrayList inputSeatsLeft, RecyclerViewClickListener listener){
         locations = inputLocations;
         descriptions = inputDescriptions;
         prices = inputPrices;
         seatsLeft = inputSeatsLeft;
+        this.listener = listener;
+    }
+
+    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
+        public ViewHolder(@NonNull View itemView) {
+            super(itemView);
+            itemView.setOnClickListener(this);
+        }
+
+        @Override
+        public void onClick(View view) {
+            listener.onClick(view, getAdapterPosition());
+        }
     }
 
     @NonNull
@@ -49,5 +68,26 @@ public class vehiclesAdapter extends RecyclerView.Adapter<vehiclesViewHolder> {
     @Override
     public int getItemCount() {
         return descriptions.size();
+    }
+
+
+    public void updateList(ArrayList newList, String listType)
+    {
+        if(listType.equals("locations")){
+            this.locations = newList;
+        }
+        else if(listType.equals("descriptions")){
+            this.descriptions = newList;
+        }
+        else if(listType.equals("prices")){
+            this.prices = newList;
+        }
+        else if(listType.equals("seatsLeft")){
+            this.seatsLeft = newList;
+        }
+    }
+
+    public interface RecyclerViewClickListener{
+        void onClick(View v, int position);
     }
 }
