@@ -6,6 +6,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
 public class vehiclesViewHolder extends RecyclerView.ViewHolder{
@@ -30,5 +31,10 @@ public class vehiclesViewHolder extends RecyclerView.ViewHolder{
                 Toast.makeText(view.getContext(), "Check", Toast.LENGTH_SHORT);
             }
         });
+    }
+
+    public ConstraintLayout getLayout()
+    {
+        return itemView.findViewById(R.id.rowLayout);
     }
 }

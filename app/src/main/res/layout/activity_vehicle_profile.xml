@@ -6,4 +6,254 @@
     android:layout_height="match_parent"
     tools:context=".VehicleProfileActivity">
 
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:context=".VehicleProfileActivity">
+
+        <TextView
+            android:id="@+id/horizontalLine1_vehicleProfileActivity"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:background="#000000"
+            android:gravity="center_horizontal"
+            android:text="Horizontal Line"
+            android:textSize="2sp"
+            app:layout_constraintBottom_toTopOf="@+id/priceTextView_vehicleProfileActivity" />
+
+        <TextView
+            android:id="@+id/horizontalLine2_vehicleProfileActivity"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:background="#000000"
+            android:gravity="center_horizontal"
+            android:text="Horizontal Line"
+            android:textSize="2sp"
+            app:layout_constraintTop_toBottomOf="@+id/bookButton_vehicleProfileActivity" />
+
+        <TextView
+            android:id="@+id/vehicleIDText_vehicleProfileActivity"
+            android:layout_width="200dp"
+            android:layout_height="50dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="25dp"
+            android:gravity="center"
+            android:text="123abc123"
+            android:textSize="24dp"
+            app:layout_constraintStart_toEndOf="@+id/vehicleIDTextView_vehicleProfileActivity"
+            app:layout_constraintTop_toBottomOf="@+id/modelText_vehicleProfileActivity" />
+
+        <TextView
+            android:id="@+id/ownerText_vehicleProfileActivity"
+            android:layout_width="200dp"
+            android:layout_height="50dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="25dp"
+            android:gravity="center"
+            android:text="John Doe"
+            android:textSize="24dp"
+            app:layout_constraintStart_toEndOf="@+id/ownerTextView_vehicleProfileActivity"
+            app:layout_constraintTop_toBottomOf="@+id/vehicleIDText_vehicleProfileActivity" />
+
+        <TextView
+            android:id="@+id/vehicleTypeTextView_vehicleProfileActivity"
+            android:layout_width="150dp"
+            android:layout_height="50dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="25dp"
+            android:gravity="center"
+            android:text="Vehicle Type:"
+            android:textAlignment="center"
+            android:textSize="24dp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/vehicleProfileTextView_vehicleProfileActivity" />
+
+        <TextView
+            android:id="@+id/brandTextView_vehicleProfileActivity"
+            android:layout_width="100dp"
+            android:layout_height="50dp"
+            android:layout_marginStart="60dp"
+            android:layout_marginTop="25dp"
+            android:gravity="center"
+            android:text="Brand:"
+            android:textAlignment="center"
+            android:textSize="24dp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/vehicleTypeTextView_vehicleProfileActivity" />
+
+        <TextView
+            android:id="@+id/modelTextView_vehicleProfileActivity"
+            android:layout_width="100dp"
+            android:layout_height="50dp"
+            android:layout_marginStart="60dp"
+            android:layout_marginTop="25dp"
+            android:gravity="center"
+            android:text="Model:"
+            android:textAlignment="center"
+            android:textSize="24dp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/brandTextView_vehicleProfileActivity" />
+
+        <TextView
+            android:id="@+id/vehicleIDTextView_vehicleProfileActivity"
+            android:layout_width="100dp"
+            android:layout_height="50dp"
+            android:layout_marginStart="60dp"
+            android:layout_marginTop="25dp"
+            android:gravity="center"
+            android:text="ID:"
+            android:textAlignment="center"
+            android:textSize="24dp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/modelTextView_vehicleProfileActivity" />
+
+        <Button
+            android:id="@+id/bookButton_vehicleProfileActivity"
+            android:layout_width="150dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="15dp"
+            android:text="Book Ride"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.501"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/seatsLeftTextView_vehicleProfileActivity" />
+
+        <TextView
+            android:id="@+id/vehicleProfileTextView_vehicleProfileActivity"
+            android:layout_width="250dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="25dp"
+            android:text="Vehicle Profile"
+            android:textAlignment="center"
+            android:textSize="30dp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/ownerTextView_vehicleProfileActivity"
+            android:layout_width="100dp"
+            android:layout_height="50dp"
+            android:layout_marginStart="60dp"
+            android:layout_marginTop="25dp"
+            android:gravity="center"
+            android:text="Owner:"
+            android:textAlignment="center"
+            android:textSize="24dp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/vehicleIDTextView_vehicleProfileActivity" />
+
+        <TextView
+            android:id="@+id/priceTextView_vehicleProfileActivity"
+            android:layout_width="80dp"
+            android:layout_height="50dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="30dp"
+            android:gravity="center"
+            android:text="Price:"
+            android:textAlignment="center"
+            android:textSize="24dp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/ownerTextView_vehicleProfileActivity" />
+
+        <TextView
+            android:id="@+id/seatsLeftTextView_vehicleProfileActivity"
+            android:layout_width="120dp"
+            android:layout_height="50dp"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="30dp"
+            android:gravity="center"
+            android:text="Seats Left:"
+            android:textAlignment="center"
+            android:textSize="24dp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toEndOf="@+id/vehicleTypeText_vehicleProfileActivity6"
+            app:layout_constraintTop_toBottomOf="@+id/ownerText_vehicleProfileActivity" />
+
+        <TextView
+            android:id="@+id/vehicleTypeText_vehicleProfileActivity"
+            android:layout_width="200dp"
+            android:layout_height="50dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="25dp"
+            android:gravity="center"
+            android:text="Car"
+            android:textSize="24dp"
+            app:layout_constraintStart_toEndOf="@+id/vehicleTypeTextView_vehicleProfileActivity"
+            app:layout_constraintTop_toBottomOf="@+id/vehicleProfileTextView_vehicleProfileActivity" />
+
+        <TextView
+            android:id="@+id/vehicleTypeText_vehicleProfileActivity6"
+            android:layout_width="80dp"
+            android:layout_height="50dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="30dp"
+            android:gravity="center"
+            android:text="1000"
+            android:textSize="24dp"
+            app:layout_constraintStart_toEndOf="@+id/priceTextView_vehicleProfileActivity"
+            app:layout_constraintTop_toBottomOf="@+id/ownerText_vehicleProfileActivity" />
+
+        <TextView
+            android:id="@+id/vehicleTypeText_vehicleProfileActivity7"
+            android:layout_width="30dp"
+            android:layout_height="50dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="30dp"
+            android:gravity="center"
+            android:text="10"
+            android:textSize="24dp"
+            app:layout_constraintStart_toEndOf="@+id/seatsLeftTextView_vehicleProfileActivity"
+            app:layout_constraintTop_toBottomOf="@+id/ownerText_vehicleProfileActivity" />
+
+        <TextView
+            android:id="@+id/brandText_vehicleProfileActivity"
+            android:layout_width="200dp"
+            android:layout_height="50dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="25dp"
+            android:gravity="center"
+            android:text="Tesla"
+            android:textSize="24dp"
+            app:layout_constraintStart_toEndOf="@+id/brandTextView_vehicleProfileActivity"
+            app:layout_constraintTop_toBottomOf="@+id/vehicleTypeText_vehicleProfileActivity" />
+
+        <TextView
+            android:id="@+id/modelText_vehicleProfileActivity"
+            android:layout_width="200dp"
+            android:layout_height="50dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="25dp"
+            android:gravity="center"
+            android:text="X"
+            android:textSize="24dp"
+            app:layout_constraintStart_toEndOf="@+id/modelTextView_vehicleProfileActivity"
+            app:layout_constraintTop_toBottomOf="@+id/brandText_vehicleProfileActivity" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <Button
+        android:id="@+id/backButton_vehicleProfileActivity"
+        android:layout_width="150dp"
+        android:layout_height="50dp"
+        android:layout_marginBottom="25dp"
+        android:text="Back"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

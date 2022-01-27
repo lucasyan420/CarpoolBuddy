@@ -1,11 +1,14 @@
 package com.ibm.carpoolbuddy;
 
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.ibm.carpoolbuddy.databinding.VehiclesRowViewBinding;
 
 import java.util.ArrayList;
 
@@ -47,6 +50,16 @@ public class vehiclesAdapter extends RecyclerView.Adapter<vehiclesViewHolder> {
         View myView = LayoutInflater.from(parent.getContext()).inflate(R.layout.vehicles_row_view, parent, false);
 
         vehiclesViewHolder holder = new vehiclesViewHolder(myView);
+
+        holder.getLayout().setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent goToVehicleProfileActivityIntent = new Intent(myView.getContext(), VehicleProfileActivity.class);
+//                goToVehicleProfileActivityIntent.putExtra("IDs", vehicleIDs.get(position).toString());
+                myView.getContext().startActivity(goToVehicleProfileActivityIntent);
+                System.out.println("Test");
+            }
+        });
 
         return holder;
     }

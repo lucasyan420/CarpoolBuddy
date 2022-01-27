@@ -58,7 +58,7 @@ public class VehiclesInfoActivity extends AppCompatActivity {
         vehicleDescriptions = new ArrayList();
 
         try{
-            setOnClickListener();
+//            setOnClickListener();
             recView = findViewById(R.id.recyclerView_vehiclesInfoActivity);
             myAdapter = new vehiclesAdapter(vehicleLocations, vehicleDescriptions, vehiclePrices, vehicleSeatsLeft, listener);
             System.out.println("Testing adapter" + myAdapter.toString());
@@ -82,16 +82,16 @@ public class VehiclesInfoActivity extends AppCompatActivity {
 
     }
 
-    private void setOnClickListener() {
-        listener = new vehiclesAdapter.RecyclerViewClickListener() {
-            @Override
-            public void onClick(View v, int position) {
-                Intent goToVehicleProfileActivityIntent = new Intent(getApplicationContext(), VehicleProfileActivity.class);
-                goToVehicleProfileActivityIntent.putExtra("IDs", vehicleIDs.get(position).toString());
-                startActivity(goToVehicleProfileActivityIntent);
-            }
-        };
-    }
+//    private void setOnClickListener() {
+//        listener = new vehiclesAdapter.RecyclerViewClickListener() {
+//            @Override
+//            public void onClick(View v, int position) {
+//                Intent goToVehicleProfileActivityIntent = new Intent(getApplicationContext(), VehicleProfileActivity.class);
+//                goToVehicleProfileActivityIntent.putExtra("IDs", vehicleIDs.get(position).toString());
+//                startActivity(goToVehicleProfileActivityIntent);
+//            }
+//        };
+//    }
 
     public void getCarDescription()
     {

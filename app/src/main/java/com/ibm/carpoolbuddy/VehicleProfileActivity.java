@@ -17,11 +17,11 @@ public class VehicleProfileActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_vehicle_profile);
 
-        String ids = "ID not set";
-
-        Bundle extras = getIntent().getExtras();
-        if(extras != null ){
-            ids = extras.getString("IDs");
-        }
+//        String ids = "ID not set";
+//
+//        Bundle extras = getIntent().getExtras();
+//        if(extras != null ){
+//            ids = extras.getString("IDs");
+//        }
     }
 }
