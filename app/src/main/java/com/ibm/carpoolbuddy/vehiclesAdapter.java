@@ -1,5 +1,6 @@
 package com.ibm.carpoolbuddy;
 
+import android.content.Context;
 import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,6 +18,10 @@ public class vehiclesAdapter extends RecyclerView.Adapter<vehiclesViewHolder> {
     ArrayList<String> descriptions;
     ArrayList<String> prices;
     ArrayList<String> seatsLeft;
+    ArrayList<String> ids;
+
+    private Context context;
+    private OnVehicleInfoListener onVehicleInfoListener;
 
     private RecyclerViewClickListener listener;
 
@@ -24,12 +29,20 @@ public class vehiclesAdapter extends RecyclerView.Adapter<vehiclesViewHolder> {
 
     }
 
-    public vehiclesAdapter(ArrayList inputLocations, ArrayList inputDescriptions, ArrayList inputPrices, ArrayList inputSeatsLeft, RecyclerViewClickListener listener){
+    public vehiclesAdapter(ArrayList inputLocations, ArrayList inputDescriptions, ArrayList inputPrices, ArrayList inputSeatsLeft, ArrayList inputIDs, RecyclerViewClickListener listener){
         locations = inputLocations;
         descriptions = inputDescriptions;
         prices = inputPrices;
         seatsLeft = inputSeatsLeft;
+        ids = inputIDs;
         this.listener = listener;
+
+        try{
+            this.onVehicleInfoListener = ((OnVehicleInfoListener)context);
+        }
+        catch (ClassCastException e){
+            throw new ClassCastException(e.getMessage());
+        }
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
@@ -49,19 +62,21 @@ public class vehiclesAdapter extends RecyclerView.Adapter<vehiclesViewHolder> {
     public vehiclesViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View myView = LayoutInflater.from(parent.getContext()).inflate(R.layout.vehicles_row_view, parent, false);
 
-        vehiclesViewHolder holder = new vehiclesViewHolder(myView);
-
-        holder.getLayout().setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent goToVehicleProfileActivityIntent = new Intent(myView.getContext(), VehicleProfileActivity.class);
-//                goToVehicleProfileActivityIntent.putExtra("IDs", vehicleIDs.get(position).toString());
-                myView.getContext().startActivity(goToVehicleProfileActivityIntent);
-                System.out.println("Test");
-            }
-        });
-
-        return holder;
+//        vehiclesViewHolder holder = new vehiclesViewHolder(myView);
+//
+//        holder.getLayout().setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Intent goToVehicleProfileActivityIntent = new Intent(myView.getContext(), VehicleProfileActivity.class);
+////                goToVehicleProfileActivityIntent.putExtra("IDs", vehicleIDs.get(position).toString());
+//                System.out.println("Testing testing testing: " + myView.getContext().toString());
+//                myView.getContext().startActivity(goToVehicleProfileActivityIntent);
+//                System.out.println("Test");
+//            }
+//        });
+//
+//        return holder;
+        return new vehiclesViewHolder(myView);
     }
 
     @Override
@@ -76,6 +91,33 @@ public class vehiclesAdapter extends RecyclerView.Adapter<vehiclesViewHolder> {
 
 //        holder.seatsLeftText.setText(seatsLeft.get(position));
         holder.seatsLeftText.setText("N/A");
+
+        holder.getLayout().setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent goToVehicleProfileActivityIntent = new Intent(view.getContext(), VehicleProfileActivity.class);
+                goToVehicleProfileActivityIntent.putExtra("Description", descriptions.get(holder.getAdapterPosition()));
+                goToVehicleProfileActivityIntent.putExtra("IDs", ids.get(holder.getAdapterPosition()));
+                view.getContext().startActivity(goToVehicleProfileActivityIntent);
+//
+//                onVehicleInfoListener.onVehicleInfoListener(intent);
+            }
+        });
+
+//        vehiclesViewHolder vehiclesHolder = new vehiclesViewHolder(holder);
+//
+//        vehiclesHolder.getLayout().setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Intent goToVehicleProfileActivityIntent = new Intent(myView.getContext(), VehicleProfileActivity.class);
+////                goToVehicleProfileActivityIntent.putExtra("IDs", vehicleIDs.get(position).toString());
+//                System.out.println("Testing testing testing: " + myView.getContext().toString());
+//                myView.getContext().startActivity(goToVehicleProfileActivityIntent);
+//                System.out.println("Test");
+//            }
+//        });
+//
+//        return holder;
     }
 
     @Override
@@ -102,5 +144,9 @@ public class vehiclesAdapter extends RecyclerView.Adapter<vehiclesViewHolder> {
 
     public interface RecyclerViewClickListener{
         void onClick(View v, int position);
+    }
+
+    public interface OnVehicleInfoListener{
+        public void onVehicleInfoListener(Intent intent);
     }
 }

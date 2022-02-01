@@ -60,7 +60,7 @@ public class VehiclesInfoActivity extends AppCompatActivity {
         try{
 //            setOnClickListener();
             recView = findViewById(R.id.recyclerView_vehiclesInfoActivity);
-            myAdapter = new vehiclesAdapter(vehicleLocations, vehicleDescriptions, vehiclePrices, vehicleSeatsLeft, listener);
+            myAdapter = new vehiclesAdapter(vehicleLocations, vehicleDescriptions, vehiclePrices, vehicleSeatsLeft, vehicleIDs, listener);
             System.out.println("Testing adapter" + myAdapter.toString());
             recView.setAdapter(myAdapter);
             recView.setLayoutManager(new LinearLayoutManager(this));

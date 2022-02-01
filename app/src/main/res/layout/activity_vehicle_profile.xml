@@ -250,6 +250,7 @@
         android:layout_width="150dp"
         android:layout_height="50dp"
         android:layout_marginBottom="25dp"
+        android:onClick="goBack"
         android:text="Back"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
