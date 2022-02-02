@@ -316,6 +316,9 @@ public class VehiclesInfoActivity extends AppCompatActivity {
     public void goBack(View v)
     {
         Intent goBackIntent = new Intent(this, MainActivity.class);
+        goBackIntent.putExtra("UserType", currentUserType);
+        goBackIntent.putExtra("UserID", currentUserID);
+        goBackIntent.putExtra("UserName", currentUserName);
         startActivity(goBackIntent);
         finish();
     }

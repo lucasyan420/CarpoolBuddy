@@ -157,6 +157,17 @@ public class VehicleProfileActivity extends AppCompatActivity {
             firestore.collection("AllObjects/AllVehicles/Cars").document(id).update("ridersUIDs", FieldValue.arrayUnion(currentUserID));
             updateUserRides();
         }
+        else if(vehicleType.equals("Electric Car"))
+        {
+            firestore.collection("AllObjects/AllVehicles/ElectricCars").document(id).update("ridersUIDs", FieldValue.arrayUnion(currentUserID));
+            updateUserRides();
+        }
+        else if(vehicleType.equals("Motorcycle"))
+        {
+            firestore.collection("AllObjects/AllVehicles/Motorcycle").document(id).update("ridersUIDs", FieldValue.arrayUnion(currentUserID));
+            updateUserRides();
+        }
+        goBack();
     }
 
     public void updateUserRides()
@@ -167,6 +178,18 @@ public class VehicleProfileActivity extends AppCompatActivity {
             {
                 firestore.collection("AllObjects/AllUsers/students").document(currentUserID).update("bookedVehicles", FieldValue.arrayUnion(id));
             }
+            else if(currentUserType.equals("teacher"))
+            {
+                firestore.collection("AllObjects/AllUsers/teachers").document(currentUserID).update("bookedVehicles", FieldValue.arrayUnion(id));
+            }
+            else if(currentUserType.equals("alumni"))
+            {
+                firestore.collection("AllObjects/AllUsers/alums").document(currentUserID).update("bookedVehicles", FieldValue.arrayUnion(id));
+            }
+            else if(currentUserType.equals("parent"))
+            {
+                firestore.collection("AllObjects/AllUsers/parents").document(currentUserID).update("bookedVehicles", FieldValue.arrayUnion(id));
+            }
         }
         catch(Exception err)
         {
@@ -174,9 +197,22 @@ public class VehicleProfileActivity extends AppCompatActivity {
         }
     }
 
+    public void goBack()
+    {
+        Intent goBackIntent = new Intent(this, VehiclesInfoActivity.class);
+        goBackIntent.putExtra("UserType", currentUserType);
+        goBackIntent.putExtra("UserID", currentUserID);
+        goBackIntent.putExtra("UserName", currentUserName);
+        startActivity(goBackIntent);
+        finish();
+    }
+
     public void goBack(View v)
     {
         Intent goBackIntent = new Intent(this, VehiclesInfoActivity.class);
+        goBackIntent.putExtra("UserType", currentUserType);
+        goBackIntent.putExtra("UserID", currentUserID);
+        goBackIntent.putExtra("UserName", currentUserName);
         startActivity(goBackIntent);
         finish();
     }
