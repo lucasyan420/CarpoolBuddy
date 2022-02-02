@@ -18,9 +18,9 @@ public class Car extends Vehicle{
         this.safetyRating = safetyRating;
     }
 
-    public Car(String ownerID, String brand, String model, int capacity, String vehicleID, ArrayList<String> ridersUIDs, boolean open, String vehicleType, double basePrice, int range, int fuelCapacity, String safetyRating)
+    public Car(String ownerID, String ownerName, String brand, String model, int capacity, String vehicleID, ArrayList<String> ridersUIDs, boolean open, String vehicleType, double basePrice, int range, int fuelCapacity, String safetyRating)
     {
-        super(ownerID, brand, model, capacity, vehicleID, ridersUIDs, open, vehicleType, basePrice);
+        super(ownerID, ownerName, brand, model, capacity, vehicleID, ridersUIDs, open, vehicleType, basePrice);
         this.range = range;
         this.fuelCapacity = fuelCapacity;
         this.safetyRating = safetyRating;
@@ -54,6 +54,7 @@ public class Car extends Vehicle{
     public String toString() {
         return "Vehicle: \n" +
                 "OwnerID = " + getOwnerID() +
+                "OwnerName = " + getOwnerName() +
                 "Brand = " + getBrand() +
                 ", Model = " + getModel() +
                 ", Capacity = " + getCapacity() +

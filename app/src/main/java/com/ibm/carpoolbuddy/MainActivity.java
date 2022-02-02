@@ -9,11 +9,23 @@ import android.view.View;
 import com.google.firebase.auth.FirebaseAuth;
 
 public class MainActivity extends AppCompatActivity {
+    private String currentUserType;
+    private String currentUserID;
+    private String currentUserName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        Bundle intentInfo = getIntent().getExtras();
+        if(intentInfo != null){
+            currentUserType = intentInfo.getString("UserType");
+            currentUserID = intentInfo.getString("UserID");
+            currentUserName = intentInfo.getString("UserName");
+
+            System.out.println("Testing testing: " + currentUserType + currentUserID + currentUserName);
+        }
     }
 
     public void logOut(View v)
@@ -28,6 +40,10 @@ public class MainActivity extends AppCompatActivity {
     public void goToVehicleInfo(View v)
     {
         Intent goToVehicleInfoIntent = new Intent(this, VehiclesInfoActivity.class);
+        goToVehicleInfoIntent.putExtra("UserType", currentUserType);
+        goToVehicleInfoIntent.putExtra("UserID", currentUserID);
+        goToVehicleInfoIntent.putExtra("UserName", currentUserName);
+
         startActivity(goToVehicleInfoIntent);
         finish();
     }
@@ -35,6 +51,10 @@ public class MainActivity extends AppCompatActivity {
     public void goToUserProfile(View v)
     {
         Intent goToUserProfileIntent = new Intent(this, UserProfileActivity.class);
+        goToUserProfileIntent.putExtra("UserType", currentUserType);
+        goToUserProfileIntent.putExtra("UserID", currentUserID);
+        goToUserProfileIntent.putExtra("UserName", currentUserName);
+
         startActivity(goToUserProfileIntent);
         finish();
     }
@@ -42,6 +62,10 @@ public class MainActivity extends AppCompatActivity {
     public void goToAddVehicle(View v)
     {
         Intent goToAddVehicleIntent = new Intent(this, AddVehicleActivity.class);
+        goToAddVehicleIntent.putExtra("UserType", currentUserType);
+        goToAddVehicleIntent.putExtra("UserID", currentUserID);
+        goToAddVehicleIntent.putExtra("UserName", currentUserName);
+
         startActivity(goToAddVehicleIntent);
         finish();
     }

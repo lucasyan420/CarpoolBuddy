@@ -17,9 +17,9 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 public class VehicleProfileActivity extends AppCompatActivity {
-    private FirebaseAuth mAuth;
+    private FirebaseAuth mAuth = FirebaseAuth.getInstance();
     private FirebaseUser user;
-    private FirebaseFirestore firestore;
+    private FirebaseFirestore firestore = FirebaseFirestore.getInstance();
     private Vehicle vehicleInfo;
 
     private TextView vehicleTypeTextView;
@@ -29,6 +29,10 @@ public class VehicleProfileActivity extends AppCompatActivity {
     private TextView vehicleOwnerTextView;
     private TextView vehiclePriceTextView;
     private TextView vehicleSeatsLeftTextView;
+
+    private String currentUserType;
+    private String currentUserID;
+    private String currentUserName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,34 +59,79 @@ public class VehicleProfileActivity extends AppCompatActivity {
         vehiclePriceTextView = findViewById(R.id.priceTextView_vehicleProfileActivity);
         vehicleSeatsLeftTextView = findViewById(R.id.seatsLeftText_vehicleProfileActivity);
 
-        Bundle extras = getIntent().getExtras();
-        if(extras != null){
-            descriptions = extras.getString("Description").split(",");
+        Bundle intentInfo = getIntent().getExtras();
+        if(intentInfo != null){
+            descriptions = intentInfo.getString("Description").split(",");
             vehicleType = descriptions[0].replace("Type: ", "");
             vehicleBrand = descriptions[1].replace("Brand: ", "");
             vehicleModel = descriptions[2].replace("Model: ", "");
 
-            id = extras.getString("ID");
-            price = extras.getString("Price");
-            seatsLeft = extras.getString("Seats Left");
+            id = intentInfo.getString("ID");
+            price = intentInfo.getString("Price");
+            seatsLeft = intentInfo.getString("Seats Left");
 
-//            if(vehicleType.equals("Car"))
-//            {
-//                firestore.collection("AllObjects/AllVehicles/Cars").document(id).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-//                    @Override
-//                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-//                        if(task.isSuccessful()){
-//                            String ownerID;
-//                            String ownerName;
-//                            DocumentSnapshot ds = task.getResult();
-//
-//                            Car car = ds.toObject(Car.class);
-//                            ownerID = car.getOwnerID();
-////                            firestore.collection("AllObjects/AllUsers")
-//                        }
-//                    }
-//                });
-//            }
+            currentUserType = intentInfo.getString("UserType");
+            currentUserID = intentInfo.getString("UserID");
+            currentUserName = intentInfo.getString("UserName");
+
+            System.out.println("Final test " + currentUserType + currentUserID + currentUserName);
+
+            try{
+                if(vehicleType.equals("Car"))
+                {
+                    firestore.collection("AllObjects/AllVehicles/Cars").document(id).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                        @Override
+                        public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                            if(task.isSuccessful()){
+                                String ownerID;
+                                String ownerName;
+                                DocumentSnapshot ds = task.getResult();
+
+                                Car car = ds.toObject(Car.class);
+                                ownerName = car.getOwnerName();
+                                vehicleOwnerTextView.setText(ownerName);
+                            }
+                        }
+                    });
+                }
+                else if(vehicleType.equals("Electric Car"))
+                {
+                    firestore.collection("AllObjects/AllVehicles/ElectricCars").document(id).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                        @Override
+                        public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                            if(task.isSuccessful()){
+                                String ownerID;
+                                String ownerName;
+                                DocumentSnapshot ds = task.getResult();
+
+                                ElectricCar electricCar = ds.toObject(ElectricCar.class);
+                                ownerName = electricCar.getOwnerName();
+                                vehicleOwnerTextView.setText(ownerName);
+                            }
+                        }
+                    });
+                }
+                else if(vehicleType.equals("Motorcycle"))
+                {
+                    firestore.collection("AllObjects/AllVehicles/Motorcycle").document(id).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                        @Override
+                        public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                            if(task.isSuccessful()){
+                                String ownerID;
+                                String ownerName;
+                                DocumentSnapshot ds = task.getResult();
+
+                                Motorcycle motorcycle = ds.toObject(Motorcycle.class);
+                                ownerName = motorcycle.getOwnerName();
+                                vehicleOwnerTextView.setText(ownerName);
+                            }
+                        }
+                    });
+                }
+            }
+            catch(Exception err){
+                err.printStackTrace();
+            }
 
             vehicleTypeTextView.setText(vehicleType);
             vehicleBrandTextView.setText(vehicleBrand);
@@ -91,6 +140,11 @@ public class VehicleProfileActivity extends AppCompatActivity {
             vehiclePriceTextView.setText("$" + price);
             vehicleSeatsLeftTextView.setText(seatsLeft);
         }
+    }
+
+    public void bookRide(View v)
+    {
+        System.out.println("booking ride");
     }
 
     public void goBack(View v)

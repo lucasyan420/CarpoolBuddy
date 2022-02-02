@@ -31,6 +31,11 @@ public class AuthActivity extends AppCompatActivity {
 
     private String id;
 
+    private String currentUserID;
+    private String currentUserName;
+    private String currentUserType;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -57,10 +62,11 @@ public class AuthActivity extends AppCompatActivity {
                 if(task.isSuccessful()) {
                     Log.d("LOG IN", "Successfully logged in the user");
 
-                    FirebaseUser user = mAuth.getCurrentUser();
+//                    FirebaseUser user = mAuth.getCurrentUser();
 
                     System.out.println("Test: " + id);
-                    updateUI(user);
+                    findUser();
+//                    updateUI(user);
                 }
                 else {
                     Log.w("LOG IN", "signInWithEmail:failure", task.getException());
@@ -72,7 +78,6 @@ public class AuthActivity extends AppCompatActivity {
 
 //    public void findCurrentID(){
 //        String emailString = emailEditText.getText().toString();
-//
 //        firestore.collection("AllObjects/AllUsers/students").whereEqualTo("email", emailString).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
 //            @Override
 //            public void onComplete(@NonNull Task<QuerySnapshot> task) {
@@ -94,6 +99,187 @@ public class AuthActivity extends AppCompatActivity {
         // });
 //    }
 
+    synchronized public void findUser(){
+        findUserInStudent();
+        findUserInParent();
+        findUserInAlumni();
+        findUserInTeacher();
+    }
+
+    public void findUserInStudent()
+    {
+        try{
+            String currentEmail = mAuth.getCurrentUser().getEmail();
+            firestore.collection("AllObjects/AllUsers/students").whereEqualTo("email", currentEmail).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                @Override
+                public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                    if(task.isSuccessful())
+                    {
+                        try{
+                            currentUserID = task.getResult().getDocuments().get(0).getId();
+                            currentUserType = "student";
+
+                            firestore.collection("AllObjects/AllUsers/students").document(currentUserID).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                                @Override
+                                public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                                    DocumentSnapshot document = task.getResult();
+                                    Student currStudent = document.toObject(Student.class);
+                                    currentUserName = currStudent.getName();
+
+                                    FirebaseUser user = mAuth.getCurrentUser();
+                                    updateUI(user);
+                                }
+                            });
+                        }
+                        catch(Exception e)
+                        {
+                            e.printStackTrace();
+                        }
+                        System.out.println("User type is " + currentUserType);
+                        System.out.println("Fourth test: " + currentUserID);
+                    }
+                    else{
+                        Log.d("Fail", "User not a student");
+                    }
+                }
+            });
+        }
+        catch(Exception e){
+            e.printStackTrace();
+        }
+    }
+
+    public void findUserInParent()
+    {
+        try{
+            String currentEmail = mAuth.getCurrentUser().getEmail();
+            firestore.collection("AllObjects/AllUsers/parents").whereEqualTo("email", currentEmail).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                @Override
+                public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                    if(task.isSuccessful())
+                    {
+                        try{
+                            currentUserID = task.getResult().getDocuments().get(0).getId();
+                            currentUserType = "parent";
+
+                            firestore.collection("AllObjects/AllUsers/parents").document(currentUserID).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                                @Override
+                                public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                                    DocumentSnapshot document = task.getResult();
+                                    Parent currParent = document.toObject(Parent.class);
+                                    currentUserName = currParent.getName();
+
+                                    FirebaseUser user = mAuth.getCurrentUser();
+                                    updateUI(user);
+                                }
+                            });
+                        }
+                        catch(Exception e)
+                        {
+                            e.printStackTrace();
+                        }
+                        System.out.println("User type is " + currentUserType);
+                        System.out.println("Fourth test: " + currentUserID);
+
+                    }
+                    else{
+                        Log.d("Fail", "User not a parent");
+                    }
+                }
+            });
+        }
+        catch(Exception e){
+            e.printStackTrace();
+        }
+    }
+
+    public void findUserInAlumni()
+    {
+        try{
+            String currentEmail = mAuth.getCurrentUser().getEmail();
+            firestore.collection("AllObjects/AllUsers/alums").whereEqualTo("email", currentEmail).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                @Override
+                public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                    if(task.isSuccessful())
+                    {
+                        try{
+                            currentUserID = task.getResult().getDocuments().get(0).getId();
+                            currentUserType = "alumni";
+
+                            firestore.collection("AllObjects/AllUsers/alums").document(currentUserID).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                                @Override
+                                public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                                    DocumentSnapshot document = task.getResult();
+                                    Alumni currAlumni = document.toObject(Alumni.class);
+                                    currentUserName = currAlumni.getName();
+
+                                    FirebaseUser user = mAuth.getCurrentUser();
+                                    updateUI(user);
+                                }
+                            });
+                        }
+                        catch(Exception e)
+                        {
+                            e.printStackTrace();
+                        }
+                        System.out.println("User type is " + currentUserType);
+                        System.out.println("Fourth test: " + currentUserID);
+                    }
+                    else{
+                        Log.d("Fail", "User not an alum");
+                    }
+                }
+            });
+        }
+        catch(Exception e){
+            e.printStackTrace();
+        }
+    }
+
+    public void findUserInTeacher()
+    {
+        try{
+            String currentEmail = mAuth.getCurrentUser().getEmail();
+            firestore.collection("AllObjects/AllUsers/teachers").whereEqualTo("email", currentEmail).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                @Override
+                public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                    if(task.isSuccessful())
+                    {
+                        try{
+                            currentUserID = task.getResult().getDocuments().get(0).getId();
+                            currentUserType = "teacher";
+
+                            firestore.collection("AllObjects/AllUsers/teachers").document(currentUserID).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                                @Override
+                                public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                                    DocumentSnapshot document = task.getResult();
+                                    Teacher currTeacher = document.toObject(Teacher.class);
+                                    currentUserName = currTeacher.getName();
+                                    System.out.println("Testing if this works: " + currentUserName);
+
+                                    FirebaseUser user = mAuth.getCurrentUser();
+                                    updateUI(user);
+                                }
+                            });
+                        }
+                        catch(Exception e)
+                        {
+                            e.printStackTrace();
+                        }
+                        System.out.println("User type is " + currentUserType);
+                        System.out.println("Fourth test: " + currentUserID);
+                    }
+                    else{
+                        Log.d("Fail", "User not a teacher");
+                    }
+                }
+            });
+        }
+        catch(Exception e){
+            e.printStackTrace();
+        }
+    }
+
     public void signUp(View v)
     {
         Intent goToSignUpProfileIntent = new Intent(this, SignUpProfile.class);
@@ -112,6 +298,10 @@ public class AuthActivity extends AppCompatActivity {
         if(currentUser != null)
         {
             Intent updateUIIntent = new Intent(this, MainActivity.class);
+            updateUIIntent.putExtra("UserType", currentUserType);
+            updateUIIntent.putExtra("UserID", currentUserID);
+            updateUIIntent.putExtra("UserName", currentUserName);
+            System.out.println("tee" + currentUserName);
             startActivity(updateUIIntent);
         }
         else

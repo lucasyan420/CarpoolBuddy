@@ -3,6 +3,7 @@ import java.util.*;
 
 public class Vehicle {
     private String ownerID;
+    private String ownerName;
     private String brand;
     private String model;
     private int capacity;
@@ -17,8 +18,9 @@ public class Vehicle {
 
     }
 
-    public Vehicle(String ownerID, String brand, String model, int capacity, String vehicleID, ArrayList<String> ridersUIDs, boolean open, String vehicleType, double basePrice) {
+    public Vehicle(String ownerID, String ownerName, String brand, String model, int capacity, String vehicleID, ArrayList<String> ridersUIDs, boolean open, String vehicleType, double basePrice) {
         this.ownerID = ownerID;
+        this.ownerName = ownerName;
         this.brand = brand;
         this.model = model;
         this.capacity = capacity;
@@ -29,12 +31,21 @@ public class Vehicle {
         this.basePrice = basePrice;
     }
 
+
     public String getOwnerID() {
         return ownerID;
     }
 
     public void setOwnerID(String owner) {
         this.ownerID = ownerID;
+    }
+
+    public String getOwnerName() {
+        return ownerName;
+    }
+
+    public void setOwnerName(String ownerName) {
+        this.ownerName = ownerName;
     }
 
     public String getBrand() { return brand; }
@@ -101,6 +112,7 @@ public class Vehicle {
     public String toString() {
         return "Vehicle: \n" +
                 "OwnerID = " + ownerID +
+                "OwnerName = " + ownerName +
                 "Brand = " + brand +
                 ", Model = " + model +
                 ", Capacity = " + capacity +

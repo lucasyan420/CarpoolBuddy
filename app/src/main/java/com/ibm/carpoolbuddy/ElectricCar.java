@@ -18,8 +18,8 @@ public class ElectricCar extends Vehicle{
         this.smartDriveFeatures = smartDriveFeatures;
     }
 
-    public ElectricCar(String ownerID, String brand, String model, int capacity, String vehicleID, ArrayList<String> ridersUIDs, boolean open, String vehicleType, double basePrice, int batteryLife, int chargingTime, String smartDriveFeatures) {
-        super(ownerID, brand, model, capacity, vehicleID, ridersUIDs, open, vehicleType, basePrice);
+    public ElectricCar(String ownerID, String ownerName, String brand, String model, int capacity, String vehicleID, ArrayList<String> ridersUIDs, boolean open, String vehicleType, double basePrice, int batteryLife, int chargingTime, String smartDriveFeatures) {
+        super(ownerID, ownerName, brand, model, capacity, vehicleID, ridersUIDs, open, vehicleType, basePrice);
         this.batteryLife = batteryLife;
         this.chargingTime = chargingTime;
         this.smartDriveFeatures = smartDriveFeatures;
@@ -53,6 +53,7 @@ public class ElectricCar extends Vehicle{
     public String toString() {
         return "Vehicle: \n" +
                 "OwnerID = " + getOwnerID() +
+                "OwnerName = " + getOwnerName() +
                 "Brand = " + getBrand() +
                 ", Model = " + getModel() +
                 ", Capacity = " + getCapacity() +

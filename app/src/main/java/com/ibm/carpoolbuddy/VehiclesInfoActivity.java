@@ -34,6 +34,10 @@ public class VehiclesInfoActivity extends AppCompatActivity {
 
     private int count = 0;
 
+    private String currentUserType;
+    private String currentUserName;
+    private String currentUserID;
+
     ArrayList<String> vehicleIDs = new ArrayList<String>();
 
     ArrayList<String> vehicleLocations = new ArrayList<String>();
@@ -54,13 +58,22 @@ public class VehiclesInfoActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_vehicles_info);
 
+        Bundle intentInfo = getIntent().getExtras();
+        if(intentInfo != null){
+            currentUserType = intentInfo.getString("UserType");
+            currentUserID = intentInfo.getString("UserID");
+            currentUserName = intentInfo.getString("UserName");
+
+            System.out.println("Testing testing 2: " + currentUserType + currentUserID + currentUserName);
+        }
+
 
         vehicleDescriptions = new ArrayList();
 
         try{
 //            setOnClickListener();
             recView = findViewById(R.id.recyclerView_vehiclesInfoActivity);
-            myAdapter = new vehiclesAdapter(vehicleLocations, vehicleDescriptions, vehiclePrices, vehicleSeatsLeft, vehicleIDs, listener);
+            myAdapter = new vehiclesAdapter(vehicleLocations, vehicleDescriptions, vehiclePrices, vehicleSeatsLeft, vehicleIDs, listener, currentUserType, currentUserID, currentUserName);
             System.out.println("Testing adapter" + myAdapter.toString());
             recView.setAdapter(myAdapter);
             recView.setLayoutManager(new LinearLayoutManager(this));

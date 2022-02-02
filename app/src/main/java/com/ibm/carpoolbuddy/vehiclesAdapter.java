@@ -20,6 +20,10 @@ public class vehiclesAdapter extends RecyclerView.Adapter<vehiclesViewHolder> {
     ArrayList<String> seatsLeft;
     ArrayList<String> ids;
 
+    private String currentUserType;
+    private String currentUserID;
+    private String currentUserName;
+
     private Context context;
     private OnVehicleInfoListener onVehicleInfoListener;
 
@@ -29,13 +33,16 @@ public class vehiclesAdapter extends RecyclerView.Adapter<vehiclesViewHolder> {
 
     }
 
-    public vehiclesAdapter(ArrayList inputLocations, ArrayList inputDescriptions, ArrayList inputPrices, ArrayList inputSeatsLeft, ArrayList inputIDs, RecyclerViewClickListener listener){
+    public vehiclesAdapter(ArrayList inputLocations, ArrayList inputDescriptions, ArrayList inputPrices, ArrayList inputSeatsLeft, ArrayList inputIDs, RecyclerViewClickListener listener, String currentUserType, String currentUserID, String currentUserName){
         locations = inputLocations;
         descriptions = inputDescriptions;
         prices = inputPrices;
         seatsLeft = inputSeatsLeft;
         ids = inputIDs;
         this.listener = listener;
+        this.currentUserType = currentUserType;
+        this.currentUserID = currentUserID;
+        this.currentUserName = currentUserName;
 
         try{
             this.onVehicleInfoListener = ((OnVehicleInfoListener)context);
@@ -107,6 +114,9 @@ public class vehiclesAdapter extends RecyclerView.Adapter<vehiclesViewHolder> {
                 goToVehicleProfileActivityIntent.putExtra("ID", ids.get(holder.getAdapterPosition()));
                 goToVehicleProfileActivityIntent.putExtra("Price", prices.get(holder.getAdapterPosition()));
                 goToVehicleProfileActivityIntent.putExtra("Seats Left", seatsLeft.get(holder.getAdapterPosition()));
+                goToVehicleProfileActivityIntent.putExtra("UserType", currentUserType);
+                goToVehicleProfileActivityIntent.putExtra("UserID", currentUserID);
+                goToVehicleProfileActivityIntent.putExtra("UserName", currentUserName);
                 view.getContext().startActivity(goToVehicleProfileActivityIntent);
 //
 //                onVehicleInfoListener.onVehicleInfoListener(intent);

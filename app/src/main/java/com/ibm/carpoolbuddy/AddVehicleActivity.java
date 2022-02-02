@@ -21,6 +21,7 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.*;
@@ -43,7 +44,9 @@ public class AddVehicleActivity extends AppCompatActivity implements AdapterView
     private Spinner vehicleTypes;
     private String selectedType;
 
+    private String currentUserType;
     private String currentUserID;
+    private String currentUserName;
     private String userType;
     private String vehicleID;
 
@@ -53,6 +56,15 @@ public class AddVehicleActivity extends AppCompatActivity implements AdapterView
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_vehicle);
+
+        Bundle intentInfo = getIntent().getExtras();
+        if(intentInfo != null){
+            currentUserType = intentInfo.getString("UserType");
+            currentUserID = intentInfo.getString("UserID");
+            currentUserName = intentInfo.getString("UserName");
+
+            System.out.println("Testing testing 2: " + currentUserType + currentUserID + currentUserName);
+        }
 
         variable1TextView = findViewById(R.id.variableTextView1_addVehicleActivity);
         variable2TextView = findViewById(R.id.variableTextView2_addVehicleActivity);
@@ -75,7 +87,7 @@ public class AddVehicleActivity extends AppCompatActivity implements AdapterView
 
     public void addVehicle(View v)
     {
-        findUser();
+//        findUser();
         addNewVehicle();
         updateOwnedVehicles();
     }
@@ -96,6 +108,15 @@ public class AddVehicleActivity extends AppCompatActivity implements AdapterView
                         try{
                             currentUserID = task.getResult().getDocuments().get(0).getId();
                             userType = "student";
+
+                            firestore.collection("AllObjects/AllUsers/students").document(currentUserID).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                                @Override
+                                public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                                    DocumentSnapshot document = task.getResult();
+                                    Student currStudent = document.toObject(Student.class);
+                                    currentUserName = currStudent.getName();
+                                }
+                            });
                         }
                         catch(Exception e)
                         {
@@ -127,6 +148,15 @@ public class AddVehicleActivity extends AppCompatActivity implements AdapterView
                         try{
                             currentUserID = task.getResult().getDocuments().get(0).getId();
                             userType = "parent";
+
+                            firestore.collection("AllObjects/AllUsers/parents").document(currentUserID).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                                @Override
+                                public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                                    DocumentSnapshot document = task.getResult();
+                                    Parent currParent = document.toObject(Parent.class);
+                                    currentUserName = currParent.getName();
+                                }
+                            });
                         }
                         catch(Exception e)
                         {
@@ -134,6 +164,7 @@ public class AddVehicleActivity extends AppCompatActivity implements AdapterView
                         }
                         System.out.println("User type is " + userType);
                         System.out.println("Fourth test: " + currentUserID);
+
                     }
                     else{
                         Log.d("Fail", "User not a parent");
@@ -158,6 +189,15 @@ public class AddVehicleActivity extends AppCompatActivity implements AdapterView
                         try{
                             currentUserID = task.getResult().getDocuments().get(0).getId();
                             userType = "alumni";
+
+                            firestore.collection("AllObjects/AllUsers/alums").document(currentUserID).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                                @Override
+                                public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                                    DocumentSnapshot document = task.getResult();
+                                    Alumni currAlumni = document.toObject(Alumni.class);
+                                    currentUserName = currAlumni.getName();
+                                }
+                            });
                         }
                         catch(Exception e)
                         {
@@ -189,6 +229,16 @@ public class AddVehicleActivity extends AppCompatActivity implements AdapterView
                         try{
                             currentUserID = task.getResult().getDocuments().get(0).getId();
                             userType = "teacher";
+
+                            firestore.collection("AllObjects/AllUsers/teachers").document(currentUserID).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                                @Override
+                                public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                                    DocumentSnapshot document = task.getResult();
+                                    Teacher currTeacher = document.toObject(Teacher.class);
+                                    currentUserName = currTeacher.getName();
+                                    System.out.println("Testing if this works: " + currentUserName);
+                                }
+                            });
                         }
                         catch(Exception e)
                         {
@@ -208,13 +258,81 @@ public class AddVehicleActivity extends AppCompatActivity implements AdapterView
         }
     }
 
-    synchronized public void findUser()
+    public void getUserName()
     {
-        findUserInStudent();
-        findUserInParent();
-        findUserInAlumni();
-        findUserInTeacher();
+//        try{
+//            if(userType.equals("teacher"))
+//            {
+//                System.out.println("Testing this student thing");
+//                firestore.collection("AllObjects/AllUsers/teachers").document(currentUserID).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+//                @Override
+//                public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+//                    DocumentSnapshot document = task.getResult();
+//                    Teacher currTeacher = document.toObject(Teacher.class);
+//                    currentUserName = currTeacher.getName();
+//                    System.out.println("Testing if this works: " + currentUserName);
+//                }
+//            });
+//            }
+//        }
+//        catch(Exception err)
+//        {
+//            err.printStackTrace();
+//        }
+//        if(userType.equals("student"))
+//        {
+//            firestore.collection("AllObjects/AllUsers/students").document(currentUserID).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+//                @Override
+//                public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+//                    DocumentSnapshot document = task.getResult();
+//                    Student currStudent = document.toObject(Student.class);
+//                    currentUserName = currStudent.getName();
+//                }
+//            });
+//        }
+//        else if(userType.equals("teacher"))
+//        {
+//            firestore.collection("AllObjects/AllUsers/teachers").document(currentUserID).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+//                @Override
+//                public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+//                    DocumentSnapshot document = task.getResult();
+//                    Teacher currTeacher = document.toObject(Teacher.class);
+//                    currentUserName = currTeacher.getName();
+//                }
+//            });
+//        }
+//        else if(userType.equals("alumni"))
+//        {
+//            firestore.collection("AllObjects/AllUsers/alums").document(currentUserID).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+//                @Override
+//                public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+//                    DocumentSnapshot document = task.getResult();
+//                    Alumni currAlumni = document.toObject(Alumni.class);
+//                    currentUserName = currAlumni.getName();
+//                }
+//            });
+//        }
+//        else if(userType.equals("parent"))
+//        {
+//            firestore.collection("AllObjects/AllUsers/parents").document(currentUserID).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+//                @Override
+//                public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+//                    DocumentSnapshot document = task.getResult();
+//                    Parent currParent = document.toObject(Parent.class);
+//                    currentUserName = currParent.getName();
+//                }
+//            });
+//        }
     }
+//
+//    synchronized public void findUser()
+//    {
+//        findUserInStudent();
+//        findUserInParent();
+//        findUserInAlumni();
+//        findUserInTeacher();
+//        getUserName();
+//    }
 
     public void addNewVehicle(){
         String brandString = brandEditText.getText().toString();
@@ -227,11 +345,12 @@ public class AddVehicleActivity extends AppCompatActivity implements AdapterView
         }
         else{
             if(selectedType.equals("Car")){
+                System.out.println("Now I'm testing this" + currentUserName);
                 int range = Integer.parseInt(variable1EditText.getText().toString());
                 int fuelCapacity = Integer.parseInt(variable2EditText.getText().toString());
                 String safetyRating = variable3EditText.getText().toString();
 
-                Car car = new Car(currentUserID, brandString, modelString, capacityInt, UUID.randomUUID().toString(), ridersUIDs, true, "Car", 20, range, fuelCapacity, safetyRating);
+                Car car = new Car(currentUserID, currentUserName, brandString, modelString, capacityInt, UUID.randomUUID().toString(), ridersUIDs, true, "Car", 20, range, fuelCapacity, safetyRating);
                 try {
                     vehicleID = car.getVehicleID();
                     firestore.collection("AllObjects/AllVehicles/Cars").document(car.getVehicleID()).set(car);
@@ -244,7 +363,7 @@ public class AddVehicleActivity extends AppCompatActivity implements AdapterView
                 int chargingTime = Integer.parseInt(variable2EditText.getText().toString());
                 String smartDriveFeatures = variable3EditText.getText().toString();
 
-                ElectricCar electricCar = new ElectricCar(currentUserID, brandString, modelString, capacityInt, UUID.randomUUID().toString(), ridersUIDs, true, "Electric Car", 30, batteryLife, chargingTime, smartDriveFeatures);
+                ElectricCar electricCar = new ElectricCar(currentUserID, currentUserName, brandString, modelString, capacityInt, UUID.randomUUID().toString(), ridersUIDs, true, "Electric Car", 30, batteryLife, chargingTime, smartDriveFeatures);
                 try {
                     vehicleID = electricCar.getVehicleID();
                     firestore.collection("AllObjects/AllVehicles/ElectricCars").document(electricCar.getVehicleID()).set(electricCar);
@@ -257,7 +376,7 @@ public class AddVehicleActivity extends AppCompatActivity implements AdapterView
                 int length = Integer.parseInt(variable2EditText.getText().toString());
                 String seatType = variable3EditText.getText().toString();
 
-                Motorcycle motorcycle = new Motorcycle(currentUserID, brandString, modelString, capacityInt, UUID.randomUUID().toString(), ridersUIDs, true, "Motorcycle", 15, weight, length, seatType);
+                Motorcycle motorcycle = new Motorcycle(currentUserID, currentUserName, brandString, modelString, capacityInt, UUID.randomUUID().toString(), ridersUIDs, true, "Motorcycle", 15, weight, length, seatType);
                 try {
                     vehicleID = motorcycle.getVehicleID();
                     firestore.collection("AllObjects/AllVehicles/Motorcycle").document(motorcycle.getVehicleID()).set(motorcycle);
