@@ -1,4 +1,5 @@
 package com.ibm.carpoolbuddy;
+import java.lang.reflect.Array;
 import java.util.*;
 
 public class User {
@@ -8,19 +9,21 @@ public class User {
     private String userType;
     private double priceMultiplier;
     ArrayList<String> ownedVehicles;
+    ArrayList<String> bookedVehicles;
 
     public User()
     {
 
     }
 
-    public User(String uid, String name, String email, String userType, double priceMultiplier, ArrayList<String> ownedVehicles) {
+    public User(String uid, String name, String email, String userType, double priceMultiplier, ArrayList<String> ownedVehicles, ArrayList<String> bookedVehicles) {
         this.uid = uid;
         this.name = name;
         this.email = email;
         this.userType = userType;
         this.priceMultiplier = priceMultiplier;
         this.ownedVehicles = ownedVehicles;
+        this.bookedVehicles = bookedVehicles;
     }
 
     public String getUid() {
@@ -71,6 +74,14 @@ public class User {
         this.ownedVehicles = ownedVehicles;
     }
 
+    public ArrayList<String> getBookedVehicles() {
+        return bookedVehicles;
+    }
+
+    public void setBookedVehicles(ArrayList<String> bookedVehicles) {
+        this.bookedVehicles = bookedVehicles;
+    }
+
     @Override
     public String toString() {
         return "User: \n" +
@@ -79,6 +90,7 @@ public class User {
                 ", Email = " + email +
                 ", User Type = " + userType +
                 ", Price Multiplier = " + priceMultiplier +
-                ", Owned Vehicles = " + ownedVehicles;
+                ", Owned Vehicles = " + ownedVehicles +
+                ", Booked Vehicles = " + bookedVehicles;
     }
 }

@@ -17,11 +17,9 @@ import android.widget.Toast;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.*;
@@ -32,14 +30,13 @@ public class AddVehicleActivity extends AppCompatActivity implements AdapterView
 
     private TextView variable1TextView;
     private TextView variable2TextView;
-    private TextView variable3TextView;
     private EditText variable1EditText;
     private EditText variable2EditText;
-    private EditText variable3EditText;
 
     private EditText brandEditText;
     private EditText modelEditText;
     private EditText capacityEditText;
+    private EditText locationEditText;
 
     private Spinner vehicleTypes;
     private String selectedType;
@@ -68,14 +65,13 @@ public class AddVehicleActivity extends AppCompatActivity implements AdapterView
 
         variable1TextView = findViewById(R.id.variableTextView1_addVehicleActivity);
         variable2TextView = findViewById(R.id.variableTextView2_addVehicleActivity);
-        variable3TextView = findViewById(R.id.variableTextView3_addVehicleActivity);
         variable1EditText = findViewById(R.id.variableEditText1_addVehicleActivity);
         variable2EditText = findViewById(R.id.variableEditText2_addVehicleActivity);
-        variable3EditText = findViewById(R.id.variableEditText3_addVehicleActivity);
 
         brandEditText = findViewById(R.id.brandEditText_addVehicleActivity);
         modelEditText = findViewById(R.id.modelEditText_addVehicleActivity);
         capacityEditText = findViewById(R.id.capacityEditText_addVehicleActivity);
+        locationEditText = findViewById(R.id.locationEditText_addVehicleActivity);
         
         vehicleTypes = findViewById(R.id.typeSpinner_addVehicleActivity);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.vehicleTypes, android.R.layout.simple_spinner_item);
@@ -89,7 +85,8 @@ public class AddVehicleActivity extends AppCompatActivity implements AdapterView
     {
 //        findUser();
         addNewVehicle();
-        updateOwnedVehicles();
+//        updateOwnedVehicles();
+        goBack();
     }
 
     private boolean formValid(){
@@ -337,6 +334,7 @@ public class AddVehicleActivity extends AppCompatActivity implements AdapterView
     public void addNewVehicle(){
         String brandString = brandEditText.getText().toString();
         String modelString = modelEditText.getText().toString();
+        String locationString = locationEditText.getText().toString();
         int capacityInt = Integer.parseInt(capacityEditText.getText().toString());
 
         if(currentUserID == null)
@@ -348,9 +346,8 @@ public class AddVehicleActivity extends AppCompatActivity implements AdapterView
                 System.out.println("Now I'm testing this" + currentUserName);
                 int range = Integer.parseInt(variable1EditText.getText().toString());
                 int fuelCapacity = Integer.parseInt(variable2EditText.getText().toString());
-                String safetyRating = variable3EditText.getText().toString();
 
-                Car car = new Car(currentUserID, currentUserName, brandString, modelString, capacityInt, UUID.randomUUID().toString(), ridersUIDs, true, "Car", 20, range, fuelCapacity, safetyRating);
+                Car car = new Car(currentUserID, currentUserName, brandString, modelString, capacityInt, UUID.randomUUID().toString(), ridersUIDs, true, "Car", 20, locationString, range, fuelCapacity);
                 try {
                     vehicleID = car.getVehicleID();
                     firestore.collection("AllObjects/AllVehicles/Cars").document(car.getVehicleID()).set(car);
@@ -361,9 +358,8 @@ public class AddVehicleActivity extends AppCompatActivity implements AdapterView
             else if(selectedType.equals("Electric Car")){
                 int batteryLife = Integer.parseInt(variable1EditText.getText().toString());
                 int chargingTime = Integer.parseInt(variable2EditText.getText().toString());
-                String smartDriveFeatures = variable3EditText.getText().toString();
 
-                ElectricCar electricCar = new ElectricCar(currentUserID, currentUserName, brandString, modelString, capacityInt, UUID.randomUUID().toString(), ridersUIDs, true, "Electric Car", 30, batteryLife, chargingTime, smartDriveFeatures);
+                ElectricCar electricCar = new ElectricCar(currentUserID, currentUserName, brandString, modelString, capacityInt, UUID.randomUUID().toString(), ridersUIDs, true, "Electric Car", 30, locationString, batteryLife, chargingTime);
                 try {
                     vehicleID = electricCar.getVehicleID();
                     firestore.collection("AllObjects/AllVehicles/ElectricCars").document(electricCar.getVehicleID()).set(electricCar);
@@ -374,9 +370,8 @@ public class AddVehicleActivity extends AppCompatActivity implements AdapterView
             else if(selectedType.equals("Motorcycle")){
                 int weight = Integer.parseInt(variable1EditText.getText().toString());
                 int length = Integer.parseInt(variable2EditText.getText().toString());
-                String seatType = variable3EditText.getText().toString();
 
-                Motorcycle motorcycle = new Motorcycle(currentUserID, currentUserName, brandString, modelString, capacityInt, UUID.randomUUID().toString(), ridersUIDs, true, "Motorcycle", 15, weight, length, seatType);
+                Motorcycle motorcycle = new Motorcycle(currentUserID, currentUserName, brandString, modelString, capacityInt, UUID.randomUUID().toString(), ridersUIDs, true, "Motorcycle", 15, locationString, weight, length);
                 try {
                     vehicleID = motorcycle.getVehicleID();
                     firestore.collection("AllObjects/AllVehicles/Motorcycle").document(motorcycle.getVehicleID()).set(motorcycle);
@@ -384,24 +379,26 @@ public class AddVehicleActivity extends AppCompatActivity implements AdapterView
                     e.printStackTrace();
                 }
             }
+
+            updateOwnedVehicles();
             goBack();
         }
     }
 
     public void updateOwnedVehicles()
     {
-        System.out.println("Checking" + userType);
+        System.out.println("Checking" + currentUserType);
         try{
-            if(userType.equals("student")){
+            if(currentUserType.equals("student")){
                 firestore.collection("AllObjects/AllUsers/students").document(currentUserID).update("ownedVehicles", FieldValue.arrayUnion(vehicleID));
             }
-            else if(userType.equals("parent")){
+            else if(currentUserType.equals("parent")){
                 firestore.collection("AllObjects/AllUsers/parents").document(currentUserID).update("ownedVehicles", FieldValue.arrayUnion(vehicleID));
             }
-            else if(userType.equals("alumni")){
+            else if(currentUserType.equals("alumni")){
                 firestore.collection("AllObjects/AllUsers/alums").document(currentUserID).update("ownedVehicles", FieldValue.arrayUnion(vehicleID));
             }
-            else if(userType.equals("teacher"))
+            else if(currentUserType.equals("teacher"))
             {
                 firestore.collection("AllObjects/AllUsers/teachers").document(currentUserID).update("ownedVehicles", FieldValue.arrayUnion(vehicleID));
             }
@@ -412,6 +409,9 @@ public class AddVehicleActivity extends AppCompatActivity implements AdapterView
 
     public void goBack(){
         Intent goBackIntent = new Intent(this, MainActivity.class);
+        goBackIntent.putExtra("UserType", currentUserType);
+        goBackIntent.putExtra("UserID", currentUserID);
+        goBackIntent.putExtra("UserName", currentUserName);
         startActivity(goBackIntent);
         finish();
     }
@@ -419,6 +419,9 @@ public class AddVehicleActivity extends AppCompatActivity implements AdapterView
     public void goBack(View v)
     {
         Intent goBackIntent = new Intent(this, MainActivity.class);
+        goBackIntent.putExtra("UserType", currentUserType);
+        goBackIntent.putExtra("UserID", currentUserID);
+        goBackIntent.putExtra("UserName", currentUserName);
         startActivity(goBackIntent);
         finish();
     }
@@ -429,24 +432,18 @@ public class AddVehicleActivity extends AppCompatActivity implements AdapterView
         if(selectedType.equals("Car")){
             variable1TextView.setText("Range:");
             variable2TextView.setText("Fuel:");
-            variable3TextView.setText("Safety:");
             variable1EditText.setHint("500");
             variable2EditText.setHint("50");
-            variable3EditText.setHint("A");
         } else if(selectedType.equals("Electric Car")){
             variable1TextView.setText("Battery:");
             variable2TextView.setText("Charging:");
-            variable3TextView.setText("Features:");
             variable1EditText.setHint("10");
             variable2EditText.setHint("1");
-            variable3EditText.setHint("Self Driving");
         } else if(selectedType.equals("Motorcycle")){
             variable1TextView.setText("Weight:");
             variable2TextView.setText("Length:");
-            variable3TextView.setText("Seat Type:");
             variable1EditText.setHint("200");
             variable2EditText.setHint("2");
-            variable3EditText.setHint("High and narrow");
         }
     }
 
@@ -455,9 +452,7 @@ public class AddVehicleActivity extends AppCompatActivity implements AdapterView
         selectedType = "Car";
         variable1TextView.setText("Range:");
         variable2TextView.setText("Fuel:");
-        variable3TextView.setText("Safety:");
         variable1EditText.setHint("500");
         variable2EditText.setHint("50");
-        variable3EditText.setHint("A");
     }
 }

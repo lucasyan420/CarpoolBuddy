@@ -28,6 +28,7 @@ public class AlumniSignUpActivity extends AppCompatActivity {
     private EditText passwordEditText;
 
     private ArrayList<String> ownedVehicles = new ArrayList<String>();
+    private ArrayList<String> bookedVehicles = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,7 +59,7 @@ public class AlumniSignUpActivity extends AppCompatActivity {
                 if(task.isSuccessful()){
                     Log.d("Test", "Successfully signed up the user");
 
-                    Alumni alumni = new Alumni(UUID.randomUUID().toString(), nameString, emailString, "Alumni", 1, ownedVehicles, graduationYear);
+                    Alumni alumni = new Alumni(UUID.randomUUID().toString(), nameString, emailString, "Alumni", 1, ownedVehicles, bookedVehicles, graduationYear);
                     try {
 //                        firestore.collection("AllUsers/students").document(student.getUid()).set(student);
                         firestore.collection("AllObjects/AllUsers/alums").document(alumni.getUid()).set(alumni);

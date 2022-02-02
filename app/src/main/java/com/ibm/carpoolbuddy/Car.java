@@ -4,26 +4,23 @@ import java.util.*;
 public class Car extends Vehicle{
     private int range;
     private int fuelCapacity;
-    private String safetyRating;
 
     public Car()
     {
 
     }
 
-    public Car(int range, int fuelCapacity, String safetyRating)
+    public Car(int range, int fuelCapacity)
     {
         this.range = range;
         this.fuelCapacity = fuelCapacity;
-        this.safetyRating = safetyRating;
     }
 
-    public Car(String ownerID, String ownerName, String brand, String model, int capacity, String vehicleID, ArrayList<String> ridersUIDs, boolean open, String vehicleType, double basePrice, int range, int fuelCapacity, String safetyRating)
+    public Car(String ownerID, String ownerName, String brand, String model, int capacity, String vehicleID, ArrayList<String> ridersUIDs, boolean open, String vehicleType, double basePrice, String startingLocation, int range, int fuelCapacity)
     {
-        super(ownerID, ownerName, brand, model, capacity, vehicleID, ridersUIDs, open, vehicleType, basePrice);
+        super(ownerID, ownerName, brand, model, capacity, vehicleID, ridersUIDs, open, vehicleType, basePrice, startingLocation);
         this.range = range;
         this.fuelCapacity = fuelCapacity;
-        this.safetyRating = safetyRating;
     }
 
     public int getRange() {
@@ -42,14 +39,6 @@ public class Car extends Vehicle{
         this.fuelCapacity = fuelCapacity;
     }
 
-    public String getSafetyReview() {
-        return safetyRating;
-    }
-
-    public void setSafetyReview(String safetyReview) {
-        this.safetyRating = safetyReview;
-    }
-
     @Override
     public String toString() {
         return "Vehicle: \n" +
@@ -63,8 +52,8 @@ public class Car extends Vehicle{
                 ", Open = " + isOpen() +
                 ", Vehicle Type = " + getVehicleType() +
                 ", Base Price = " + getBasePrice() +
+                ", Starting Location = " + getStartingLocation() +
                 ", Range = " + range +
-                ", Fuel Capacity = " + fuelCapacity +
-                ", Safety Review = " + safetyRating;
+                ", Fuel Capacity = " + fuelCapacity;
     }
 }

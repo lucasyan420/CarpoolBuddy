@@ -34,6 +34,7 @@ public class ParentSignUpActivity extends AppCompatActivity {
 
     private ArrayList<String> childrenIDs = new ArrayList<String>();
     private ArrayList<String> ownedVehicles = new ArrayList<String>();
+    private ArrayList<String> bookedVehicles = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,7 +62,7 @@ public class ParentSignUpActivity extends AppCompatActivity {
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if(task.isSuccessful()){
                     Log.d("Test", "Successfully signed up the user");
-                    Parent parent = new Parent(UUID.randomUUID().toString(), nameString, emailString, "Parent", 1, ownedVehicles, childrenIDs);
+                    Parent parent = new Parent(UUID.randomUUID().toString(), nameString, emailString, "Parent", 1, ownedVehicles, bookedVehicles, childrenIDs);
                     try {
                         firestore.collection("AllObjects/AllUsers/parents").document(parent.getUid()).set(parent);
                     } catch (Exception e) {

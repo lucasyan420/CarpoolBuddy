@@ -14,6 +14,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 public class VehicleProfileActivity extends AppCompatActivity {
@@ -29,10 +30,22 @@ public class VehicleProfileActivity extends AppCompatActivity {
     private TextView vehicleOwnerTextView;
     private TextView vehiclePriceTextView;
     private TextView vehicleSeatsLeftTextView;
+    private TextView vehicleLocationTextView;
 
     private String currentUserType;
     private String currentUserID;
     private String currentUserName;
+
+    String[] descriptions;
+    String vehicleType;
+    String vehicleBrand;
+    String vehicleModel;
+
+
+    String id;
+    String price;
+    String seatsLeft;
+    String location;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,16 +54,6 @@ public class VehicleProfileActivity extends AppCompatActivity {
 
         System.out.println("Profile Activity");
 
-        String[] descriptions;
-        String vehicleType;
-        String vehicleBrand;
-        String vehicleModel;
-
-
-        String id;
-        String price;
-        String seatsLeft;
-
         vehicleTypeTextView = findViewById(R.id.vehicleTypeText_vehicleProfileActivity);
         vehicleBrandTextView = findViewById(R.id.brandText_vehicleProfileActivity);
         vehicleModelTextView = findViewById(R.id.modelText_vehicleProfileActivity);
@@ -58,6 +61,7 @@ public class VehicleProfileActivity extends AppCompatActivity {
         vehicleOwnerTextView = findViewById(R.id.ownerText_vehicleProfileActivity);
         vehiclePriceTextView = findViewById(R.id.priceTextView_vehicleProfileActivity);
         vehicleSeatsLeftTextView = findViewById(R.id.seatsLeftText_vehicleProfileActivity);
+        vehicleLocationTextView = findViewById(R.id.locationTextView_vehicleProfileActivity);
 
         Bundle intentInfo = getIntent().getExtras();
         if(intentInfo != null){
@@ -73,6 +77,8 @@ public class VehicleProfileActivity extends AppCompatActivity {
             currentUserType = intentInfo.getString("UserType");
             currentUserID = intentInfo.getString("UserID");
             currentUserName = intentInfo.getString("UserName");
+
+            location = intentInfo.getString("Location");
 
             System.out.println("Final test " + currentUserType + currentUserID + currentUserName);
 
@@ -139,12 +145,33 @@ public class VehicleProfileActivity extends AppCompatActivity {
             vehicleIDTextView.setText(id);
             vehiclePriceTextView.setText("$" + price);
             vehicleSeatsLeftTextView.setText(seatsLeft);
+            vehicleLocationTextView.setText(location);
         }
     }
 
     public void bookRide(View v)
     {
         System.out.println("booking ride");
+        if(vehicleType.equals("Car"))
+        {
+            firestore.collection("AllObjects/AllVehicles/Cars").document(id).update("ridersUIDs", FieldValue.arrayUnion(currentUserID));
+            updateUserRides();
+        }
+    }
+
+    public void updateUserRides()
+    {
+        try{
+            System.out.println("Testing this thing" + currentUserType);
+            if(currentUserType.equals("student"))
+            {
+                firestore.collection("AllObjects/AllUsers/students").document(currentUserID).update("bookedVehicles", FieldValue.arrayUnion(id));
+            }
+        }
+        catch(Exception err)
+        {
+            err.printStackTrace();
+        }
     }
 
     public void goBack(View v)

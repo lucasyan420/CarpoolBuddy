@@ -14,8 +14,8 @@ public class Alumni extends User{
         this.graduateYear = graduateYear;
     }
 
-    public Alumni(String uid, String name, String email, String userType, double priceMultiplier, ArrayList<String> ownedVehicles, String graduateYear) {
-        super(uid, name, email, userType, priceMultiplier, ownedVehicles);
+    public Alumni(String uid, String name, String email, String userType, double priceMultiplier, ArrayList<String> ownedVehicles, ArrayList<String> bookedVehicles, String graduateYear) {
+        super(uid, name, email, userType, priceMultiplier, ownedVehicles, bookedVehicles);
         this.graduateYear = graduateYear;
     }
 

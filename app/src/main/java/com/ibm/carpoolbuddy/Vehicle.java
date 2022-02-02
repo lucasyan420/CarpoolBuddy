@@ -12,13 +12,14 @@ public class Vehicle {
     private boolean open;
     private String vehicleType;
     private double basePrice;
+    private String startingLocation;
 
     public Vehicle()
     {
 
     }
 
-    public Vehicle(String ownerID, String ownerName, String brand, String model, int capacity, String vehicleID, ArrayList<String> ridersUIDs, boolean open, String vehicleType, double basePrice) {
+    public Vehicle(String ownerID, String ownerName, String brand, String model, int capacity, String vehicleID, ArrayList<String> ridersUIDs, boolean open, String vehicleType, double basePrice, String startingLocation) {
         this.ownerID = ownerID;
         this.ownerName = ownerName;
         this.brand = brand;
@@ -29,6 +30,7 @@ public class Vehicle {
         this.open = open;
         this.vehicleType = vehicleType;
         this.basePrice = basePrice;
+        this.startingLocation = startingLocation;
     }
 
 
@@ -108,6 +110,14 @@ public class Vehicle {
         this.basePrice = basePrice;
     }
 
+    public String getStartingLocation() {
+        return startingLocation;
+    }
+
+    public void setStartingLocation(String startingLocation) {
+        this.startingLocation = startingLocation;
+    }
+
     @Override
     public String toString() {
         return "Vehicle: \n" +
@@ -120,6 +130,7 @@ public class Vehicle {
                 ", Riders User IDs = " + ridersUIDs +
                 ", Open = " + open +
                 ", Vehicle Type = " + vehicleType +
-                ", Base Price = " + basePrice;
+                ", Base Price = " + basePrice +
+                ", Starting Location = " + startingLocation;
     }
 }

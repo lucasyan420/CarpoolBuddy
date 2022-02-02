@@ -28,6 +28,7 @@ public class TeacherSignUpActivity extends AppCompatActivity {
     private EditText passwordEditText;
 
     private ArrayList<String> ownedVehicles = new ArrayList<String>();
+    private ArrayList<String> bookedVehicles = new ArrayList<String>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,7 +58,7 @@ public class TeacherSignUpActivity extends AppCompatActivity {
                 if(task.isSuccessful()){
                     Log.d("Test", "Successfully signed up the user");
 
-                    Teacher teacher = new Teacher(UUID.randomUUID().toString(), nameString, emailString, "Teacher", 1, ownedVehicles, schoolTitleString);
+                    Teacher teacher = new Teacher(UUID.randomUUID().toString(), nameString, emailString, "Teacher", 1, ownedVehicles, bookedVehicles, schoolTitleString);
                     try {
 //                        firestore.collection("AllUsers/students").document(student.getUid()).set(student);
                         firestore.collection("AllObjects/AllUsers/teachers").document(teacher.getUid()).set(teacher);

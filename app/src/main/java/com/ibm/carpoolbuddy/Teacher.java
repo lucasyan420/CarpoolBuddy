@@ -14,8 +14,8 @@ public class Teacher extends User{
         this.SchoolTitle = SchoolTitle;
     }
 
-    public Teacher(String uid, String name, String email, String userType, double priceMultiplier, ArrayList<String> ownedVehicles, String SchoolTitle) {
-        super(uid, name, email, userType, priceMultiplier, ownedVehicles);
+    public Teacher(String uid, String name, String email, String userType, double priceMultiplier, ArrayList<String> ownedVehicles, ArrayList<String> bookedVehicles, String SchoolTitle) {
+        super(uid, name, email, userType, priceMultiplier, ownedVehicles, bookedVehicles);
         this.SchoolTitle = SchoolTitle;
     }
 
@@ -36,6 +36,7 @@ public class Teacher extends User{
                 ", Email = " + getEmail() +
                 ", User Type = " + getUserType() +
                 ", Price Multiplier = " + getPriceMultiplier() +
-                ", Owned Vehicles = " + getOwnedVehicles();
+                ", Owned Vehicles = " + getOwnedVehicles() +
+                ", Booked Vehicles = " + getBookedVehicles();
     }
 }

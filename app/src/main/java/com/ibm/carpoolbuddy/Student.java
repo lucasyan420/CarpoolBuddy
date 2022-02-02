@@ -14,8 +14,8 @@ public class Student extends User{
         this.parentUIDs = parentUIDs;
     }
 
-    public Student(String uid, String name, String email, String userType, double priceMultiplier, ArrayList<String> ownedVehicles, String graduatingYear, ArrayList<String> parentUIDs) {
-        super(uid, name, email, userType, priceMultiplier, ownedVehicles);
+    public Student(String uid, String name, String email, String userType, double priceMultiplier, ArrayList<String> ownedVehicles, ArrayList<String> bookedVehicles, String graduatingYear, ArrayList<String> parentUIDs) {
+        super(uid, name, email, userType, priceMultiplier, ownedVehicles, bookedVehicles);
         this.graduatingYear = graduatingYear;
         this.parentUIDs = parentUIDs;
     }

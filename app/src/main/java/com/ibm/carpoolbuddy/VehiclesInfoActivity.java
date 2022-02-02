@@ -131,6 +131,15 @@ public class VehiclesInfoActivity extends AppCompatActivity {
 
                             String vehicleCapacity = document.getData().get("capacity").toString();
                             vehicleSeatsLeft.add(vehicleCapacity);
+
+                            try{
+                                String vehicleLocation = document.getData().get("startingLocation").toString();
+                                vehicleLocations.add(vehicleLocation);
+                            }
+                            catch(Exception err)
+                            {
+                                err.printStackTrace();
+                            }
                         }
 
                         for(int i = 0; i < vehicleTypes.size(); i++)
@@ -153,6 +162,7 @@ public class VehiclesInfoActivity extends AppCompatActivity {
                         myAdapter.updateList(vehicleDescriptions, "descriptions");
                         myAdapter.updateList(vehiclePrices, "prices");
                         myAdapter.updateList(vehicleSeatsLeft, "seatsLeft");
+                        myAdapter.updateList(vehicleLocations, "startingLocations");
                         myAdapter.notifyDataSetChanged();
 
                     }
@@ -191,6 +201,15 @@ public class VehiclesInfoActivity extends AppCompatActivity {
 
                             String vehicleCapacity = document.getData().get("capacity").toString();
                             vehicleSeatsLeft.add(vehicleCapacity);
+
+                            try{
+                                String vehicleLocation = document.getData().get("startingLocation").toString();
+                                vehicleLocations.add(vehicleLocation);
+                            }
+                            catch(Exception err)
+                            {
+                                err.printStackTrace();
+                            }
                         }
 
                         for(int i = 0; i < vehicleTypes.size(); i++)
@@ -212,6 +231,7 @@ public class VehiclesInfoActivity extends AppCompatActivity {
                         myAdapter.updateList(vehicleDescriptions, "descriptions");
                         myAdapter.updateList(vehiclePrices, "prices");
                         myAdapter.updateList(vehicleSeatsLeft, "seatsLeft");
+                        myAdapter.updateList(vehicleLocations, "startingLocations");
                         myAdapter.notifyDataSetChanged();
                     }
                     else{
@@ -249,6 +269,15 @@ public class VehiclesInfoActivity extends AppCompatActivity {
 
                             String vehicleCapacity = document.getData().get("capacity").toString();
                             vehicleSeatsLeft.add(vehicleCapacity);
+
+                            try{
+                                String vehicleLocation = document.getData().get("startingLocation").toString();
+                                vehicleLocations.add(vehicleLocation);
+                            }
+                            catch(Exception err)
+                            {
+                                err.printStackTrace();
+                            }
                         }
 
                         for(int i = 0; i < vehicleTypes.size(); i++)
@@ -271,6 +300,7 @@ public class VehiclesInfoActivity extends AppCompatActivity {
                         myAdapter.updateList(vehicleDescriptions, "descriptions");
                         myAdapter.updateList(vehiclePrices, "prices");
                         myAdapter.updateList(vehicleSeatsLeft, "seatsLeft");
+                        myAdapter.updateList(vehicleLocations, "startingLocations");
                         myAdapter.notifyDataSetChanged();
                     }
                     else{

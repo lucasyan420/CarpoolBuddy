@@ -13,8 +13,8 @@ public class Parent extends User{
         this.childrenUIDs = childrenUIDs;
     }
 
-    public Parent(String uid, String name, String email, String userType, double priceMultiplier, ArrayList<String> ownedVehicles, ArrayList<String> childrenUIDs) {
-        super(uid, name, email, userType, priceMultiplier, ownedVehicles);
+    public Parent(String uid, String name, String email, String userType, double priceMultiplier, ArrayList<String> ownedVehicles, ArrayList<String> bookedVehicles, ArrayList<String> childrenUIDs) {
+        super(uid, name, email, userType, priceMultiplier, ownedVehicles, bookedVehicles);
         this.childrenUIDs = childrenUIDs;
     }
 

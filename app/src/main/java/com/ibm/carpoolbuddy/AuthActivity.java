@@ -313,9 +313,9 @@ public class AuthActivity extends AppCompatActivity {
 
     public void test(View v)
     {
-        Alumni testAlumni1 = new Alumni(UUID.randomUUID().toString(), "Lucas", "lucasyan2005@gmail.com", "Alumni", 10, null, "2015");
-        Student testStudent1 = new Student(UUID.randomUUID().toString(), "Bob", "bob@gmail.com", "Student", 1, null, "2023", null);
-        Student testStudent2 = new Student(UUID.randomUUID().toString(), "jim", "jim@gmail.com", "Student", 1, null, "2023", null);
+        Alumni testAlumni1 = new Alumni(UUID.randomUUID().toString(), "Lucas", "lucasyan2005@gmail.com", "Alumni", 10, null, null, "2015");
+        Student testStudent1 = new Student(UUID.randomUUID().toString(), "Bob", "bob@gmail.com", "Student", 1, null, null, "2023", null);
+        Student testStudent2 = new Student(UUID.randomUUID().toString(), "jim", "jim@gmail.com", "Student", 1, null, null,"2023", null);
 
         firestore.collection("items").document("test").set(testStudent1);
         firestore.collection("AllSchools/cis/students").document(testStudent1.getUid()).set(testStudent1);

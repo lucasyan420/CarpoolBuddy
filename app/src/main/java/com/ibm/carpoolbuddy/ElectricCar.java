@@ -5,24 +5,21 @@ import java.util.ArrayList;
 public class ElectricCar extends Vehicle{
     private int batteryLife;
     private int chargingTime;
-    private String smartDriveFeatures;
 
     public ElectricCar()
     {
 
     }
 
-    public ElectricCar(int batteryLife, int chargingTime, String smartDriveFeatures) {
+    public ElectricCar(int batteryLife, int chargingTime) {
         this.batteryLife = batteryLife;
         this.chargingTime = chargingTime;
-        this.smartDriveFeatures = smartDriveFeatures;
     }
 
-    public ElectricCar(String ownerID, String ownerName, String brand, String model, int capacity, String vehicleID, ArrayList<String> ridersUIDs, boolean open, String vehicleType, double basePrice, int batteryLife, int chargingTime, String smartDriveFeatures) {
-        super(ownerID, ownerName, brand, model, capacity, vehicleID, ridersUIDs, open, vehicleType, basePrice);
+    public ElectricCar(String ownerID, String ownerName, String brand, String model, int capacity, String vehicleID, ArrayList<String> ridersUIDs, boolean open, String vehicleType, double basePrice, String startingLocation, int batteryLife, int chargingTime) {
+        super(ownerID, ownerName, brand, model, capacity, vehicleID, ridersUIDs, open, vehicleType, basePrice, startingLocation);
         this.batteryLife = batteryLife;
         this.chargingTime = chargingTime;
-        this.smartDriveFeatures = smartDriveFeatures;
     }
 
     public int getBatteryLife() {
@@ -41,14 +38,6 @@ public class ElectricCar extends Vehicle{
         this.chargingTime = chargingTime;
     }
 
-    public String getSmartDriveFeatures() {
-        return smartDriveFeatures;
-    }
-
-    public void setSmartDriveFeatures(String smartDriveFeatures) {
-        this.smartDriveFeatures = smartDriveFeatures;
-    }
-
     @Override
     public String toString() {
         return "Vehicle: \n" +
@@ -62,8 +51,8 @@ public class ElectricCar extends Vehicle{
                 ", Open = " + isOpen() +
                 ", Vehicle Type = " + getVehicleType() +
                 ", Base Price = " + getBasePrice() +
+                ", Starting Location = " + getStartingLocation() +
                 ", Battery Life = " + batteryLife +
-                ", Charging Time = " + chargingTime +
-                ", Smart Drive Features = " + smartDriveFeatures;
+                ", Charging Time = " + chargingTime;
     }
 }

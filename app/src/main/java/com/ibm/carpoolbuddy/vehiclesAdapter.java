@@ -89,7 +89,7 @@ public class vehiclesAdapter extends RecyclerView.Adapter<vehiclesViewHolder> {
     @Override
     public void onBindViewHolder(@NonNull vehiclesViewHolder holder, int position) {
 //        holder.locationText.setText(locations.get(position));
-        holder.locationText.setText("N/A");
+        holder.locationText.setText(locations.get(position));
 
         holder.descriptionText.setText(descriptions.get(position));
 //
@@ -117,6 +117,7 @@ public class vehiclesAdapter extends RecyclerView.Adapter<vehiclesViewHolder> {
                 goToVehicleProfileActivityIntent.putExtra("UserType", currentUserType);
                 goToVehicleProfileActivityIntent.putExtra("UserID", currentUserID);
                 goToVehicleProfileActivityIntent.putExtra("UserName", currentUserName);
+                goToVehicleProfileActivityIntent.putExtra("Location", locations.get(holder.getAdapterPosition()));
                 view.getContext().startActivity(goToVehicleProfileActivityIntent);
 //
 //                onVehicleInfoListener.onVehicleInfoListener(intent);
