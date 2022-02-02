@@ -23,7 +23,7 @@
             android:gravity="center_horizontal"
             android:text="Horizontal Line"
             android:textSize="2sp"
-            app:layout_constraintBottom_toTopOf="@+id/priceTextView_vehicleProfileActivity" />
+            app:layout_constraintBottom_toTopOf="@+id/priceTextTextView_vehicleProfileActivity" />
 
         <TextView
             android:id="@+id/horizontalLine2_vehicleProfileActivity"
@@ -40,11 +40,11 @@
             android:id="@+id/vehicleIDText_vehicleProfileActivity"
             android:layout_width="200dp"
             android:layout_height="50dp"
-            android:layout_marginStart="10dp"
+            android:layout_marginStart="8dp"
             android:layout_marginTop="25dp"
             android:gravity="center"
             android:text="123abc123"
-            android:textSize="24dp"
+            android:textSize="14sp"
             app:layout_constraintStart_toEndOf="@+id/vehicleIDTextView_vehicleProfileActivity"
             app:layout_constraintTop_toBottomOf="@+id/modelText_vehicleProfileActivity" />
 
@@ -125,7 +125,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.501"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/seatsLeftTextView_vehicleProfileActivity" />
+            app:layout_constraintTop_toBottomOf="@+id/seatsLeftTextTextView_vehicleProfileActivity" />
 
         <TextView
             android:id="@+id/vehicleProfileTextView_vehicleProfileActivity"
@@ -156,7 +156,7 @@
             app:layout_constraintTop_toBottomOf="@+id/vehicleIDTextView_vehicleProfileActivity" />
 
         <TextView
-            android:id="@+id/priceTextView_vehicleProfileActivity"
+            android:id="@+id/priceTextTextView_vehicleProfileActivity"
             android:layout_width="80dp"
             android:layout_height="50dp"
             android:layout_marginStart="20dp"
@@ -170,7 +170,7 @@
             app:layout_constraintTop_toBottomOf="@+id/ownerTextView_vehicleProfileActivity" />
 
         <TextView
-            android:id="@+id/seatsLeftTextView_vehicleProfileActivity"
+            android:id="@+id/seatsLeftTextTextView_vehicleProfileActivity"
             android:layout_width="120dp"
             android:layout_height="50dp"
             android:layout_marginStart="30dp"
@@ -180,7 +180,7 @@
             android:textAlignment="center"
             android:textSize="24dp"
             android:textStyle="bold"
-            app:layout_constraintStart_toEndOf="@+id/vehicleTypeText_vehicleProfileActivity6"
+            app:layout_constraintStart_toEndOf="@+id/priceTextView_vehicleProfileActivity"
             app:layout_constraintTop_toBottomOf="@+id/ownerText_vehicleProfileActivity" />
 
         <TextView
@@ -196,7 +196,7 @@
             app:layout_constraintTop_toBottomOf="@+id/vehicleProfileTextView_vehicleProfileActivity" />
 
         <TextView
-            android:id="@+id/vehicleTypeText_vehicleProfileActivity6"
+            android:id="@+id/priceTextView_vehicleProfileActivity"
             android:layout_width="80dp"
             android:layout_height="50dp"
             android:layout_marginStart="10dp"
@@ -204,11 +204,11 @@
             android:gravity="center"
             android:text="1000"
             android:textSize="24dp"
-            app:layout_constraintStart_toEndOf="@+id/priceTextView_vehicleProfileActivity"
+            app:layout_constraintStart_toEndOf="@+id/priceTextTextView_vehicleProfileActivity"
             app:layout_constraintTop_toBottomOf="@+id/ownerText_vehicleProfileActivity" />
 
         <TextView
-            android:id="@+id/vehicleTypeText_vehicleProfileActivity7"
+            android:id="@+id/seatsLeftText_vehicleProfileActivity"
             android:layout_width="30dp"
             android:layout_height="50dp"
             android:layout_marginStart="10dp"
@@ -216,7 +216,7 @@
             android:gravity="center"
             android:text="10"
             android:textSize="24dp"
-            app:layout_constraintStart_toEndOf="@+id/seatsLeftTextView_vehicleProfileActivity"
+            app:layout_constraintStart_toEndOf="@+id/seatsLeftTextTextView_vehicleProfileActivity"
             app:layout_constraintTop_toBottomOf="@+id/ownerText_vehicleProfileActivity" />
 
         <TextView

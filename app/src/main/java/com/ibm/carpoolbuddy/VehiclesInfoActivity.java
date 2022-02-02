@@ -130,13 +130,16 @@ public class VehiclesInfoActivity extends AppCompatActivity {
 //                            System.out.println(descriptions);
 //                        }
 
+
                         vehicleBrands.clear();
                         vehicleTypes.clear();
                         vehicleModels.clear();
-                        vehiclePrices.clear();
-                        vehicleSeatsLeft.clear();
+//                        vehiclePrices.clear();
+//                        vehicleSeatsLeft.clear();
 
                         myAdapter.updateList(vehicleDescriptions, "descriptions");
+                        myAdapter.updateList(vehiclePrices, "prices");
+                        myAdapter.updateList(vehicleSeatsLeft, "seatsLeft");
                         myAdapter.notifyDataSetChanged();
 
                     }
@@ -190,10 +193,12 @@ public class VehiclesInfoActivity extends AppCompatActivity {
                         vehicleBrands.clear();
                         vehicleTypes.clear();
                         vehicleModels.clear();
-                        vehiclePrices.clear();
-                        vehicleSeatsLeft.clear();
+//                        vehiclePrices.clear();
+//                        vehicleSeatsLeft.clear();
 
                         myAdapter.updateList(vehicleDescriptions, "descriptions");
+                        myAdapter.updateList(vehiclePrices, "prices");
+                        myAdapter.updateList(vehicleSeatsLeft, "seatsLeft");
                         myAdapter.notifyDataSetChanged();
                     }
                     else{
@@ -240,16 +245,19 @@ public class VehiclesInfoActivity extends AppCompatActivity {
                             vehicleDescriptions.add("Type: " + vehicleTypes.get(i) + ", Brand: " + vehicleBrands.get(i) + ", Model: " + vehicleModels.get(i));
                         }
 
+
                         vehicleBrands.clear();
                         vehicleTypes.clear();
                         vehicleModels.clear();
-                        vehiclePrices.clear();
-                        vehicleSeatsLeft.clear();
+//                        vehiclePrices.clear();
+//                        vehicleSeatsLeft.clear();
 
 //                        for(String descriptions: vehicleDescriptions){
 //                            System.out.println(descriptions);
 //                        }
                         myAdapter.updateList(vehicleDescriptions, "descriptions");
+                        myAdapter.updateList(vehiclePrices, "prices");
+                        myAdapter.updateList(vehicleSeatsLeft, "seatsLeft");
                         myAdapter.notifyDataSetChanged();
                     }
                     else{

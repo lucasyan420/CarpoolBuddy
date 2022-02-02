@@ -9,7 +9,7 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.ibm.carpoolbuddy.databinding.VehiclesRowViewBinding;
+//import com.ibm.carpoolbuddy.databinding.VehiclesRowViewBinding;
 
 import java.util.ArrayList;
 
@@ -87,17 +87,26 @@ public class vehiclesAdapter extends RecyclerView.Adapter<vehiclesViewHolder> {
         holder.descriptionText.setText(descriptions.get(position));
 //
 //        holder.priceText.setText(prices.get(position));
-        holder.priceText.setText("N/A");
+        try
+        {
+            holder.priceText.setText(prices.get(position));
+        }
+        catch(Exception err)
+        {
+            err.printStackTrace();
+        }
 
 //        holder.seatsLeftText.setText(seatsLeft.get(position));
-        holder.seatsLeftText.setText("N/A");
+        holder.seatsLeftText.setText(seatsLeft.get(position));
 
         holder.getLayout().setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent goToVehicleProfileActivityIntent = new Intent(view.getContext(), VehicleProfileActivity.class);
                 goToVehicleProfileActivityIntent.putExtra("Description", descriptions.get(holder.getAdapterPosition()));
-                goToVehicleProfileActivityIntent.putExtra("IDs", ids.get(holder.getAdapterPosition()));
+                goToVehicleProfileActivityIntent.putExtra("ID", ids.get(holder.getAdapterPosition()));
+                goToVehicleProfileActivityIntent.putExtra("Price", prices.get(holder.getAdapterPosition()));
+                goToVehicleProfileActivityIntent.putExtra("Seats Left", seatsLeft.get(holder.getAdapterPosition()));
                 view.getContext().startActivity(goToVehicleProfileActivityIntent);
 //
 //                onVehicleInfoListener.onVehicleInfoListener(intent);

@@ -51,10 +51,20 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
                 android:layout_marginEnd="10dp"
-                android:text="Price"
+                android:text="$"
                 android:textSize="28sp"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toBottomOf="@+id/seatsLeftTextView_vehiclesRowView" />
+
+            <TextView
+                android:id="@+id/priceTextTextView_vehicleRowView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:text="$"
+                android:textSize="28sp"
+                app:layout_constraintEnd_toStartOf="@+id/priceTextView_vehiclesRowView"
+                app:layout_constraintTop_toBottomOf="@+id/seatsLeftTextView_vehiclesRowView" />
 
             <TextView
                 android:id="@+id/seatsLeftTextView_vehiclesRowView"
@@ -62,10 +72,20 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
                 android:layout_marginEnd="10dp"
-                android:text="Seats Left"
+                android:text="#"
                 android:textSize="28sp"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/priceTextView_vehiclesRowView" />
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/seatsLeftTextTextView_vehicleRowView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:text="Seats Left: "
+                android:textSize="28sp"
+                app:layout_constraintEnd_toStartOf="@+id/seatsLeftTextView_vehiclesRowView"
+                app:layout_constraintTop_toTopOf="parent" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
 </androidx.constraintlayout.widget.ConstraintLayout>
