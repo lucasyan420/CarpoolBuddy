@@ -70,4 +70,13 @@ public class MainActivity extends AppCompatActivity {
         finish();
     }
 
+    public void goToLuckyReward(View v) {
+        Intent goToLuckyRewardIntent = new Intent(this, LuckyRewardActivity.class);
+        goToLuckyRewardIntent.putExtra("UserType", currentUserType);
+        goToLuckyRewardIntent.putExtra("UserID", currentUserID);
+        goToLuckyRewardIntent.putExtra("UserName", currentUserName);
+
+        startActivity(goToLuckyRewardIntent);
+        finish();
+    }
 }

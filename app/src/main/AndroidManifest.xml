@@ -10,6 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.CarpoolBuddy">
         <activity
+            android:name=".LuckyRewardActivity"
+            android:exported="true" />
+        <activity
             android:name=".ParentSignUpActivity"
             android:exported="true" />
         <activity

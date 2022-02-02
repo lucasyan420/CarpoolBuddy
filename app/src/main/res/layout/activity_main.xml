@@ -15,7 +15,16 @@
         android:text="Log Out"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/goToLuckyRewardButton_mainActivity"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:onClick="goToLuckyReward"
+        android:text="Lucky Reward"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/goToAddVehicleButton_mainActivity" />
 
@@ -24,7 +33,7 @@
         android:layout_width="150dp"
         android:layout_height="150dp"
         android:layout_marginStart="30dp"
-        android:layout_marginTop="25dp"
+        android:layout_marginTop="20dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/goToVehicleInfoButton_mainActivity"
         app:srcCompat="@drawable/screenshot_2022_01_15_at_7_57_06_pm" />
@@ -33,7 +42,7 @@
         android:id="@+id/goToAddVehicleButton_mainActivity"
         android:layout_width="150dp"
         android:layout_height="50dp"
-        android:layout_marginTop="25dp"
+        android:layout_marginTop="20dp"
         android:layout_marginEnd="30dp"
         android:onClick="goToAddVehicle"
         android:text="Add Vehicle"
@@ -45,7 +54,7 @@
         android:id="@+id/imageView5"
         android:layout_width="150dp"
         android:layout_height="150dp"
-        android:layout_marginTop="25dp"
+        android:layout_marginTop="20dp"
         android:layout_marginEnd="30dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/goToVehicleInfoButton_mainActivity"
@@ -56,7 +65,7 @@
         android:layout_width="150dp"
         android:layout_height="50dp"
         android:layout_marginStart="30dp"
-        android:layout_marginTop="25dp"
+        android:layout_marginTop="20dp"
         android:onClick="goToUserProfile"
         android:text="User Profile"
         android:textSize="14sp"
@@ -67,7 +76,7 @@
         android:id="@+id/imageView7"
         android:layout_width="250dp"
         android:layout_height="250dp"
-        android:layout_marginTop="25dp"
+        android:layout_marginTop="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"

@@ -311,47 +311,47 @@ public class AuthActivity extends AppCompatActivity {
         }
     }
 
-    public void test(View v)
-    {
-        Alumni testAlumni1 = new Alumni(UUID.randomUUID().toString(), "Lucas", "lucasyan2005@gmail.com", "Alumni", 10, null, null, "2015");
-        Student testStudent1 = new Student(UUID.randomUUID().toString(), "Bob", "bob@gmail.com", "Student", 1, null, null, "2023", null);
-        Student testStudent2 = new Student(UUID.randomUUID().toString(), "jim", "jim@gmail.com", "Student", 1, null, null,"2023", null);
-
-        firestore.collection("items").document("test").set(testStudent1);
-        firestore.collection("AllSchools/cis/students").document(testStudent1.getUid()).set(testStudent1);
-        firestore.collection("AllSchools/cis/alums").document(testAlumni1.getUid()).set(testAlumni1);
-        firestore.collection("AllSchools/hkis/students").document(testStudent2.getUid()).set(testStudent2);
-        firestore.collection("AllSchools/cis/students").document(testStudent2.getUid()).set(testStudent2);
-
-//        firestore.collection("Test").document("Alumni test").set(testAlumni1);
-//        firestore.collection("Test").document("Student test").set(testStudent1);
-//        firestore.collection("AllSchools").document("CIS").collection("student").document(testStudent1.getUid()).set(testStudent1);
-//        firestore.collection("AllSchools").document("CIS").collection("alumni").document(testAlumni1.getUid()).set(testAlumni1);
-//        firestore.collection("AllSchools").document("HKIS").collection("alumni").document(testAlumni1.getUid()).set(testAlumni1);
-//        firestore.collection("AllSchools/CIS/student").document(testStudent1.getUid()).set(testStudent1);
-//        firestore.collection("AllSchools/CIS/alumni").document(testAlumni1.getUid()).set(testAlumni1);
-//        firestore.collection("AllSchools/HKIS/alumni").document(testAlumni1.getUid()).set(testAlumni1);
+//    public void test(View v)
+//    {
+//        Alumni testAlumni1 = new Alumni(UUID.randomUUID().toString(), "Lucas", "lucasyan2005@gmail.com", "Alumni", 10, null, null, "2015");
+//        Student testStudent1 = new Student(UUID.randomUUID().toString(), "Bob", "bob@gmail.com", "Student", 1, null, null, "2023", null);
+//        Student testStudent2 = new Student(UUID.randomUUID().toString(), "jim", "jim@gmail.com", "Student", 1, null, null,"2023", null);
 //
-        Log.d("Test", "ID to look for: " + testStudent1.getUid());
+//        firestore.collection("items").document("test").set(testStudent1);
+//        firestore.collection("AllSchools/cis/students").document(testStudent1.getUid()).set(testStudent1);
+//        firestore.collection("AllSchools/cis/alums").document(testAlumni1.getUid()).set(testAlumni1);
+//        firestore.collection("AllSchools/hkis/students").document(testStudent2.getUid()).set(testStudent2);
+//        firestore.collection("AllSchools/cis/students").document(testStudent2.getUid()).set(testStudent2);
 //
-        firestore.collection("AllSchools/cis/students").document(testStudent1.getUid()).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                if(task.isSuccessful())
-                {
-                    DocumentSnapshot ds = task.getResult();
+////        firestore.collection("Test").document("Alumni test").set(testAlumni1);
+////        firestore.collection("Test").document("Student test").set(testStudent1);
+////        firestore.collection("AllSchools").document("CIS").collection("student").document(testStudent1.getUid()).set(testStudent1);
+////        firestore.collection("AllSchools").document("CIS").collection("alumni").document(testAlumni1.getUid()).set(testAlumni1);
+////        firestore.collection("AllSchools").document("HKIS").collection("alumni").document(testAlumni1.getUid()).set(testAlumni1);
+////        firestore.collection("AllSchools/CIS/student").document(testStudent1.getUid()).set(testStudent1);
+////        firestore.collection("AllSchools/CIS/alumni").document(testAlumni1.getUid()).set(testAlumni1);
+////        firestore.collection("AllSchools/HKIS/alumni").document(testAlumni1.getUid()).set(testAlumni1);
+////
+//        Log.d("Test", "ID to look for: " + testStudent1.getUid());
+////
+//        firestore.collection("AllSchools/cis/students").document(testStudent1.getUid()).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+//            @Override
+//            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+//                if(task.isSuccessful())
+//                {
+//                    DocumentSnapshot ds = task.getResult();
+////
+//                    User myUser = ds.toObject(User.class);
+//                    Student myStudent = ds.toObject(Student.class);
+////
+//                    Log.d("Test", myUser.getName());
+//                    Log.d("Test", myStudent.getGraduatingYear());
+//                }
+//                else
+//                {
 //
-                    User myUser = ds.toObject(User.class);
-                    Student myStudent = ds.toObject(Student.class);
-//
-                    Log.d("Test", myUser.getName());
-                    Log.d("Test", myStudent.getGraduatingYear());
-                }
-                else
-                {
-
-                }
-            }
-        });
-    }
+//                }
+//            }
+//        });
+//    }
 }

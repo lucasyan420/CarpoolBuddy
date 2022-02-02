@@ -41,11 +41,12 @@ public class VehicleProfileActivity extends AppCompatActivity {
     String vehicleBrand;
     String vehicleModel;
 
-
     String id;
     String price;
     String seatsLeft;
     String location;
+
+    private int environmentPoints;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -96,6 +97,8 @@ public class VehicleProfileActivity extends AppCompatActivity {
                                 Car car = ds.toObject(Car.class);
                                 ownerName = car.getOwnerName();
                                 vehicleOwnerTextView.setText(ownerName);
+
+                                environmentPoints = 5;
                             }
                         }
                     });
@@ -113,6 +116,8 @@ public class VehicleProfileActivity extends AppCompatActivity {
                                 ElectricCar electricCar = ds.toObject(ElectricCar.class);
                                 ownerName = electricCar.getOwnerName();
                                 vehicleOwnerTextView.setText(ownerName);
+
+                                environmentPoints = 20;
                             }
                         }
                     });
@@ -130,6 +135,8 @@ public class VehicleProfileActivity extends AppCompatActivity {
                                 Motorcycle motorcycle = ds.toObject(Motorcycle.class);
                                 ownerName = motorcycle.getOwnerName();
                                 vehicleOwnerTextView.setText(ownerName);
+
+                                environmentPoints = 10;
                             }
                         }
                     });
@@ -167,6 +174,7 @@ public class VehicleProfileActivity extends AppCompatActivity {
             firestore.collection("AllObjects/AllVehicles/Motorcycle").document(id).update("ridersUIDs", FieldValue.arrayUnion(currentUserID));
             updateUserRides();
         }
+        updateEnvironmentPoints();
         goBack();
     }
 
@@ -194,6 +202,23 @@ public class VehicleProfileActivity extends AppCompatActivity {
         catch(Exception err)
         {
             err.printStackTrace();
+        }
+    }
+
+    public void updateEnvironmentPoints()
+    {
+        if(currentUserType.equals("student")){
+            firestore.collection("AllObjects/AllUsers/students").document(currentUserID).update("environmentPoints", FieldValue.increment(environmentPoints));
+        }
+        else if(currentUserType.equals("parent")){
+            firestore.collection("AllObjects/AllUsers/parents").document(currentUserID).update("environmentPoints", FieldValue.increment(environmentPoints));
+        }
+        else if(currentUserType.equals("alumni")){
+            firestore.collection("AllObjects/AllUsers/alums").document(currentUserID).update("environmentPoints", FieldValue.increment(environmentPoints));
+        }
+        else if(currentUserType.equals("teacher"))
+        {
+            firestore.collection("AllObjects/AllUsers/teachers").document(currentUserID).update("environmentPoints", FieldValue.increment(environmentPoints));
         }
     }
 

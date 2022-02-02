@@ -10,13 +10,14 @@ public class User {
     private double priceMultiplier;
     ArrayList<String> ownedVehicles;
     ArrayList<String> bookedVehicles;
+    private int environmentPoints;
 
     public User()
     {
 
     }
 
-    public User(String uid, String name, String email, String userType, double priceMultiplier, ArrayList<String> ownedVehicles, ArrayList<String> bookedVehicles) {
+    public User(String uid, String name, String email, String userType, double priceMultiplier, ArrayList<String> ownedVehicles, ArrayList<String> bookedVehicles, int environmentPoints) {
         this.uid = uid;
         this.name = name;
         this.email = email;
@@ -24,6 +25,7 @@ public class User {
         this.priceMultiplier = priceMultiplier;
         this.ownedVehicles = ownedVehicles;
         this.bookedVehicles = bookedVehicles;
+        this.environmentPoints = environmentPoints;
     }
 
     public String getUid() {
@@ -80,6 +82,14 @@ public class User {
 
     public void setBookedVehicles(ArrayList<String> bookedVehicles) {
         this.bookedVehicles = bookedVehicles;
+    }
+
+    public int getEnvironmentPoints() {
+        return environmentPoints;
+    }
+
+    public void setEnvironmentPoints(int environmentPoints) {
+        this.environmentPoints = environmentPoints;
     }
 
     @Override

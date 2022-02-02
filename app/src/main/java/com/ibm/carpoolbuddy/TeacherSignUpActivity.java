@@ -58,7 +58,7 @@ public class TeacherSignUpActivity extends AppCompatActivity {
                 if(task.isSuccessful()){
                     Log.d("Test", "Successfully signed up the user");
 
-                    Teacher teacher = new Teacher(UUID.randomUUID().toString(), nameString, emailString, "Teacher", 1, ownedVehicles, bookedVehicles, schoolTitleString);
+                    Teacher teacher = new Teacher(UUID.randomUUID().toString(), nameString, emailString, "Teacher", 1, ownedVehicles, bookedVehicles, 0, schoolTitleString);
                     try {
 //                        firestore.collection("AllUsers/students").document(student.getUid()).set(student);
                         firestore.collection("AllObjects/AllUsers/teachers").document(teacher.getUid()).set(teacher);

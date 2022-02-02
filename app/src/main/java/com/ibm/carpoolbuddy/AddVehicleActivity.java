@@ -379,7 +379,6 @@ public class AddVehicleActivity extends AppCompatActivity implements AdapterView
                     e.printStackTrace();
                 }
             }
-
             updateOwnedVehicles();
             goBack();
         }
