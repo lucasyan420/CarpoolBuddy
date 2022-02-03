@@ -37,6 +37,8 @@ public class VehicleProfileActivity extends AppCompatActivity {
     private String currentUserID;
     private String currentUserName;
 
+    private String ownerID;
+
     String[] descriptions;
     String vehicleType;
     String vehicleBrand;
@@ -46,6 +48,7 @@ public class VehicleProfileActivity extends AppCompatActivity {
     String price;
     String seatsLeft;
     String location;
+    String ownerName;
 
     private int capacityLeft;
 
@@ -54,6 +57,7 @@ public class VehicleProfileActivity extends AppCompatActivity {
     /**
      * When a vehicle is selected, a page containing its information is displayed with the option
      * to book a ride
+     *
      * @param savedInstanceState
      */
     @Override
@@ -97,14 +101,16 @@ public class VehicleProfileActivity extends AppCompatActivity {
                         @Override
                         public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                             if (task.isSuccessful()) {
-                                String ownerID;
                                 String ownerName;
                                 DocumentSnapshot ds = task.getResult();
 
                                 Car car = ds.toObject(Car.class);
                                 ownerName = car.getOwnerName();
+
                                 capacityLeft = car.getCapacity();
                                 vehicleOwnerTextView.setText(ownerName);
+
+                                ownerID = car.getOwnerID();
 
                                 environmentPoints = 5;
                             }
@@ -115,8 +121,6 @@ public class VehicleProfileActivity extends AppCompatActivity {
                         @Override
                         public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                             if (task.isSuccessful()) {
-                                String ownerID;
-                                String ownerName;
                                 DocumentSnapshot ds = task.getResult();
 
                                 ElectricCar electricCar = ds.toObject(ElectricCar.class);
@@ -133,14 +137,14 @@ public class VehicleProfileActivity extends AppCompatActivity {
                         @Override
                         public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                             if (task.isSuccessful()) {
-                                String ownerID;
-                                String ownerName;
                                 DocumentSnapshot ds = task.getResult();
 
                                 Motorcycle motorcycle = ds.toObject(Motorcycle.class);
                                 ownerName = motorcycle.getOwnerName();
                                 capacityLeft = motorcycle.getCapacity();
                                 vehicleOwnerTextView.setText(ownerName);
+
+                                ownerID = motorcycle.getOwnerID();
 
                                 environmentPoints = 10;
                             }
@@ -158,6 +162,8 @@ public class VehicleProfileActivity extends AppCompatActivity {
             vehiclePriceTextView.setText("$" + price);
             vehicleSeatsLeftTextView.setText(seatsLeft);
             vehicleLocationTextView.setText(location);
+
+            System.out.println("owner id test 1:" + ownerID);
         }
     }
 
@@ -166,6 +172,7 @@ public class VehicleProfileActivity extends AppCompatActivity {
      * the vehicle's ridersUIDs is updated with the current user's id. The vehicle's capacity also
      * decreases by one. UpdateUserRides is called to update user's booked rides and
      * updateEnvironmentPoints to add to environmentPoints tally for user
+     *
      * @param v
      */
     public void bookRide(View v) {
@@ -227,8 +234,23 @@ public class VehicleProfileActivity extends AppCompatActivity {
         }
     }
 
-    /** Goes back to vehicleInfoActivity
-     *
+    public void closeRide(View v) {
+        if (currentUserName.equals(ownerName)) {
+            if (vehicleType.equals("Car")) {
+                firestore.collection("AllObjects/AllVehicles/Cars").document(id).update("capacity", 0);
+            } else if (vehicleType.equals("Electric Car")) {
+                firestore.collection("AllObjects/AllVehicles/ElectricCars").document(id).update("capacity", 0);
+            } else if (vehicleType.equals("Motorcycle")) {
+                firestore.collection("AllObjects/AllVehicles/Motorcycle").document(id).update("capacity", 0);
+            }
+            goBack();
+        } else {
+            Toast.makeText(getApplicationContext(), "You are not the owner", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    /**
+     * Goes back to vehicleInfoActivity
      */
     public void goBack() {
         Intent goBackIntent = new Intent(this, VehiclesInfoActivity.class);
