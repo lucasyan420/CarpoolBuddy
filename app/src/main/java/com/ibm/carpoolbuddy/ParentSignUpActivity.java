@@ -21,6 +21,11 @@ import com.google.firebase.firestore.QuerySnapshot;
 import java.util.ArrayList;
 import java.util.UUID;
 
+/**
+ * User can create a parent account using Firebase Auth, inputting characteristics including
+ * child names (if applicable), which then searches for child name and updates both the child
+ * and parent profiles to include the parent/child ids.
+ */
 public class ParentSignUpActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private FirebaseFirestore firestore;
@@ -50,7 +55,12 @@ public class ParentSignUpActivity extends AppCompatActivity {
         childNameEditText = findViewById(R.id.childNameEditText_parentSignUpActivity);
     }
 
-    public void signUp(View v){
+    /**
+     * Parent account is created using inputted parameters, and object is saved into firebase
+     * database.
+     * @param v
+     */
+    public void signUp(View v) {
         System.out.println("Sign up test");
         String nameString = nameEditText.getText().toString();
         String emailString = emailEditText.getText().toString();
@@ -60,7 +70,7 @@ public class ParentSignUpActivity extends AppCompatActivity {
         mAuth.createUserWithEmailAndPassword(emailString, passwordString).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
-                if(task.isSuccessful()){
+                if (task.isSuccessful()) {
                     Log.d("Test", "Successfully signed up the user");
                     Parent parent = new Parent(UUID.randomUUID().toString(), nameString, emailString, "Parent", 1, ownedVehicles, bookedVehicles, 0, childrenIDs);
                     try {
@@ -70,15 +80,17 @@ public class ParentSignUpActivity extends AppCompatActivity {
                     }
                     updateParentRelationships();
                     goBack();
-                }
-                else {
+                } else {
                     Log.w("Test", "createUserWithEmail:failure", task.getException());
                 }
             }
         });
     }
 
-    public void updateParentRelationships(){
+    /**
+     * Parent's id is received and updateStudentID and updateRelationships is called
+     */
+    public void updateParentRelationships() {
         updateStudentID();
 
         String nameString = nameEditText.getText().toString();
@@ -93,7 +105,11 @@ public class ParentSignUpActivity extends AppCompatActivity {
         });
     }
 
-    public void updateStudentID(){
+    /** Child name is inputted and then found in database, and the arraylist childrenIDs is updated
+     * with the children ids
+     *
+     */
+    public void updateStudentID() {
         String childNameString = childNameEditText.getText().toString();
 
         firestore.collection("AllObjects/AllUsers/students").whereEqualTo("name", childNameString).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
@@ -104,31 +120,39 @@ public class ParentSignUpActivity extends AppCompatActivity {
                         Log.d("Test", document.getId() + " => " + document.getData());
                         childrenIDs.add(document.getId());
                     }
-                }
-                else {
+                } else {
                     Log.d("Test", "Error getting documents: ", task.getException());
                 }
             }
         });
     }
 
-    public void updateRelationships(String id)
-    {
+    /**
+     * Using parent id, parent's children id is updated with the childrenIDs arraylist. Children's
+     * parentIDs is also updated with the parent's id.
+     * @param id
+     */
+    public void updateRelationships(String id) {
         //Update this student's parentUIDs with the parentIDs array
         firestore.collection("AllObjects/AllUsers/parents/").document(id).update("childrenUIDs", childrenIDs);
         //For each parent in parentIDs array, will update childrenUIDs of the parent with this student's id
-        for(String child: childrenIDs)
-        {
+        for (String child : childrenIDs) {
             firestore.collection("AllObjects/AllUsers/students/").document(child).update("parentUIDs", FieldValue.arrayUnion(id));
         }
     }
 
-    public void goBack(){
+    /**
+     * Goes back to signUpProfile activity
+     */
+    public void goBack() {
         Intent goBackIntent = new Intent(this, SignUpProfile.class);
         startActivity(goBackIntent);
     }
 
-    public void goBack(View v){
+    /**
+     * Goes back to signUpProfile activity
+     */
+    public void goBack(View v) {
         Intent goBackIntent = new Intent(this, SignUpProfile.class);
         startActivity(goBackIntent);
     }

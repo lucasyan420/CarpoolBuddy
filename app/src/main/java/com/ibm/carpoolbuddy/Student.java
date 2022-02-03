@@ -1,11 +1,16 @@
 package com.ibm.carpoolbuddy;
+
 import java.util.*;
 
-public class Student extends User{
+/**
+ * This class details the characteristics of the student object (which extends the user object),
+ * including the constructors, getters, setters and toString method
+ */
+public class Student extends User {
     private String graduatingYear;
     private ArrayList<String> parentUIDs;
 
-    public Student(){
+    public Student() {
 
     }
 

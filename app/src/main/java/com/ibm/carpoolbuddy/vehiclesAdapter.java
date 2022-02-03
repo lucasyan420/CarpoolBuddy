@@ -13,6 +13,11 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
+/**
+ * Vehicleadapter for the recycler view of available rides. Shows various characteristics of
+ * rides. When one view of recycler view is clicked on, intent brings user to the vehicleProfile
+ * page of the chosen vehicle
+ */
 public class vehiclesAdapter extends RecyclerView.Adapter<vehiclesViewHolder> {
     ArrayList<String> locations;
     ArrayList<String> descriptions;
@@ -29,11 +34,11 @@ public class vehiclesAdapter extends RecyclerView.Adapter<vehiclesViewHolder> {
 
     private RecyclerViewClickListener listener;
 
-    public vehiclesAdapter(){
+    public vehiclesAdapter() {
 
     }
 
-    public vehiclesAdapter(ArrayList inputLocations, ArrayList inputDescriptions, ArrayList inputPrices, ArrayList inputSeatsLeft, ArrayList inputIDs, RecyclerViewClickListener listener, String currentUserType, String currentUserID, String currentUserName){
+    public vehiclesAdapter(ArrayList inputLocations, ArrayList inputDescriptions, ArrayList inputPrices, ArrayList inputSeatsLeft, ArrayList inputIDs, RecyclerViewClickListener listener, String currentUserType, String currentUserID, String currentUserName) {
         locations = inputLocations;
         descriptions = inputDescriptions;
         prices = inputPrices;
@@ -44,15 +49,14 @@ public class vehiclesAdapter extends RecyclerView.Adapter<vehiclesViewHolder> {
         this.currentUserID = currentUserID;
         this.currentUserName = currentUserName;
 
-        try{
-            this.onVehicleInfoListener = ((OnVehicleInfoListener)context);
-        }
-        catch (ClassCastException e){
+        try {
+            this.onVehicleInfoListener = ((OnVehicleInfoListener) context);
+        } catch (ClassCastException e) {
             throw new ClassCastException(e.getMessage());
         }
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
+    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             itemView.setOnClickListener(this);
@@ -94,12 +98,9 @@ public class vehiclesAdapter extends RecyclerView.Adapter<vehiclesViewHolder> {
         holder.descriptionText.setText(descriptions.get(position));
 //
 //        holder.priceText.setText(prices.get(position));
-        try
-        {
+        try {
             holder.priceText.setText(prices.get(position));
-        }
-        catch(Exception err)
-        {
+        } catch (Exception err) {
             err.printStackTrace();
         }
 
@@ -146,27 +147,23 @@ public class vehiclesAdapter extends RecyclerView.Adapter<vehiclesViewHolder> {
     }
 
 
-    public void updateList(ArrayList newList, String listType)
-    {
-        if(listType.equals("locations")){
+    public void updateList(ArrayList newList, String listType) {
+        if (listType.equals("locations")) {
             this.locations = newList;
-        }
-        else if(listType.equals("descriptions")){
+        } else if (listType.equals("descriptions")) {
             this.descriptions = newList;
-        }
-        else if(listType.equals("prices")){
+        } else if (listType.equals("prices")) {
             this.prices = newList;
-        }
-        else if(listType.equals("seatsLeft")){
+        } else if (listType.equals("seatsLeft")) {
             this.seatsLeft = newList;
         }
     }
 
-    public interface RecyclerViewClickListener{
+    public interface RecyclerViewClickListener {
         void onClick(View v, int position);
     }
 
-    public interface OnVehicleInfoListener{
+    public interface OnVehicleInfoListener {
         public void onVehicleInfoListener(Intent intent);
     }
 }

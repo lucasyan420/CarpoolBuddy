@@ -2,12 +2,15 @@ package com.ibm.carpoolbuddy;
 
 import java.util.ArrayList;
 
-public class ElectricCar extends Vehicle{
+/**
+ * This is the electric car class which creates the car object with its characteristics,
+ * and includes constructor, getters, setters and toString. Extends the vehicle class
+ */
+public class ElectricCar extends Vehicle {
     private int batteryLife;
     private int chargingTime;
 
-    public ElectricCar()
-    {
+    public ElectricCar() {
 
     }
 

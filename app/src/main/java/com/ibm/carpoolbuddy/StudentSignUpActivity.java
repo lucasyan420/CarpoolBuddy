@@ -22,6 +22,9 @@ import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.*;
 
+/**
+ * User can create student account with characteristics
+ */
 public class StudentSignUpActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private FirebaseFirestore firestore;
@@ -53,7 +56,13 @@ public class StudentSignUpActivity extends AppCompatActivity {
         parentNameEditText = findViewById(R.id.parentNameEditText_studentSignUpActivity);
     }
 
-    public void signUp(View v){
+    /**
+     * Student inputs various characteristics, and using FirebaseAuth, a student account/object
+     * is created and firebase database is updated with new student object. Student relationship
+     * updating method is called.
+     * @param v
+     */
+    public void signUp(View v) {
         System.out.println("Sign up test");
         String nameString = nameEditText.getText().toString();
         String graduationYear = graduationYearEditText.getText().toString();
@@ -64,7 +73,7 @@ public class StudentSignUpActivity extends AppCompatActivity {
         mAuth.createUserWithEmailAndPassword(emailString, passwordString).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
-                if(task.isSuccessful()){
+                if (task.isSuccessful()) {
                     Log.d("Test", "Successfully signed up the user");
                     Student student = new Student(UUID.randomUUID().toString(), nameString, emailString, "Student", 1, ownedVehicles, bookedVehicles, 0, graduationYear, parentIDs);
                     try {
@@ -74,15 +83,17 @@ public class StudentSignUpActivity extends AppCompatActivity {
                     }
                     updateStudentRelationships();
                     goBack();
-                }
-                else {
+                } else {
                     Log.w("Test", "createUserWithEmail:failure", task.getException());
                 }
             }
         });
     }
 
-    public void updateStudentRelationships(){
+    /**
+     * Calls updateParentID and in students, gets the student id and calls updateRelationship
+     */
+    public void updateStudentRelationships() {
         updateParentID();
 
         String nameString = nameEditText.getText().toString();
@@ -97,8 +108,10 @@ public class StudentSignUpActivity extends AppCompatActivity {
         });
     }
 
-
-    public void updateParentID(){
+    /**
+     * Gets parent's name, finds it in database and adds the parent's id to an arraylist
+     */
+    public void updateParentID() {
         String parentNameString = parentNameEditText.getText().toString();
 
         firestore.collection("AllObjects/AllUsers/parents").whereEqualTo("name", parentNameString).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
@@ -109,31 +122,36 @@ public class StudentSignUpActivity extends AppCompatActivity {
                         Log.d("Test", document.getId() + " => " + document.getData());
                         parentIDs.add(document.getId());
                     }
-                }
-                else {
+                } else {
                     Log.d("Test", "Error getting documents: ", task.getException());
                 }
             }
         });
     }
 
-    public void updateRelationships(String id)
-    {
+    /**
+     * Student's parentUIDs is updated with parentIDs arraylist, and parent's childrenUIDs is
+     * updated with this student's id.
+     * @param id
+     */
+    public void updateRelationships(String id) {
         //Update this student's parentUIDs with the parentIDs array
         firestore.collection("AllObjects/AllUsers/students/").document(id).update("parentUIDs", parentIDs);
         //For each parent in parentIDs array, will update childrenUIDs of the parent with this student's id
-        for(String parents: parentIDs)
-        {
+        for (String parents : parentIDs) {
             firestore.collection("AllObjects/AllUsers/parents/").document(parents).update("childrenUIDs", FieldValue.arrayUnion(id));
         }
     }
 
-    public void goBack(){
+    /**
+     * Goes back to SignUpProfile activity
+     */
+    public void goBack() {
         Intent goBackIntent = new Intent(this, SignUpProfile.class);
         startActivity(goBackIntent);
     }
 
-    public void goBack(View v){
+    public void goBack(View v) {
         Intent goBackIntent = new Intent(this, SignUpProfile.class);
         startActivity(goBackIntent);
     }

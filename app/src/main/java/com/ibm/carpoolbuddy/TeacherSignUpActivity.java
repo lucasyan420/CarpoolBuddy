@@ -30,6 +30,10 @@ public class TeacherSignUpActivity extends AppCompatActivity {
     private ArrayList<String> ownedVehicles = new ArrayList<String>();
     private ArrayList<String> bookedVehicles = new ArrayList<String>();
 
+    /**
+     * User can create a teacher account/object with characteristics
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,7 +48,12 @@ public class TeacherSignUpActivity extends AppCompatActivity {
         passwordEditText = findViewById(R.id.passwordEditText_teacherSignUpActivity);
     }
 
-    public void signUp(View v){
+    /**
+     * Teacher inputs various characteristics, and using FirebaseAuth, a teacher account/object
+     * is created and firebase database is updated with new teacher object.
+     * @param v
+     */
+    public void signUp(View v) {
         System.out.println("Sign up test");
         String nameString = nameEditText.getText().toString();
         String schoolTitleString = schoolTitleEditText.getText().toString();
@@ -55,7 +64,7 @@ public class TeacherSignUpActivity extends AppCompatActivity {
         mAuth.createUserWithEmailAndPassword(emailString, passwordString).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
-                if(task.isSuccessful()){
+                if (task.isSuccessful()) {
                     Log.d("Test", "Successfully signed up the user");
 
                     Teacher teacher = new Teacher(UUID.randomUUID().toString(), nameString, emailString, "Teacher", 1, ownedVehicles, bookedVehicles, 0, schoolTitleString);
@@ -67,20 +76,22 @@ public class TeacherSignUpActivity extends AppCompatActivity {
                     }
                     Log.d("Test", "Test3");
                     goBack();
-                }
-                else {
+                } else {
                     Log.w("Test", "createUserWithEmail:failure", task.getException());
                 }
             }
         });
     }
 
-    public void goBack(){
+    /**
+     * Goes back to signupprofile activity
+     */
+    public void goBack() {
         Intent goBackIntent = new Intent(this, SignUpProfile.class);
         startActivity(goBackIntent);
     }
 
-    public void goBack(View v){
+    public void goBack(View v) {
         Intent goBackIntent = new Intent(this, SignUpProfile.class);
         startActivity(goBackIntent);
     }

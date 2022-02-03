@@ -1,7 +1,13 @@
 package com.ibm.carpoolbuddy;
+
 import java.lang.reflect.Array;
 import java.util.*;
 
+/**
+ * This class details the characteristics of the overarching user object which emcompasses the
+ * student, teacher, parent and alumni class, and includes the constructors, getters, setters
+ * and toString method
+ */
 public class User {
     private String uid;
     private String name;
@@ -12,8 +18,7 @@ public class User {
     ArrayList<String> bookedVehicles;
     private int environmentPoints;
 
-    public User()
-    {
+    public User() {
 
     }
 

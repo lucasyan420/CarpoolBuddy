@@ -1,23 +1,25 @@
 package com.ibm.carpoolbuddy;
+
 import java.util.*;
 
-public class Car extends Vehicle{
+/**
+ * This is the car class which creates the car object with its characteristics, and includes
+ * constructor, getters, setters and toString. Extends the vehicle class
+ */
+public class Car extends Vehicle {
     private int range;
     private int fuelCapacity;
 
-    public Car()
-    {
+    public Car() {
 
     }
 
-    public Car(int range, int fuelCapacity)
-    {
+    public Car(int range, int fuelCapacity) {
         this.range = range;
         this.fuelCapacity = fuelCapacity;
     }
 
-    public Car(String ownerID, String ownerName, String brand, String model, int capacity, String vehicleID, ArrayList<String> ridersUIDs, boolean open, String vehicleType, double basePrice, String startingLocation, int range, int fuelCapacity)
-    {
+    public Car(String ownerID, String ownerName, String brand, String model, int capacity, String vehicleID, ArrayList<String> ridersUIDs, boolean open, String vehicleType, double basePrice, String startingLocation, int range, int fuelCapacity) {
         super(ownerID, ownerName, brand, model, capacity, vehicleID, ridersUIDs, open, vehicleType, basePrice, startingLocation);
         this.range = range;
         this.fuelCapacity = fuelCapacity;

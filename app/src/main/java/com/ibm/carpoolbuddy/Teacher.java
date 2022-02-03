@@ -2,11 +2,14 @@ package com.ibm.carpoolbuddy;
 
 import java.util.ArrayList;
 
-public class Teacher extends User{
+/**
+ * This class details the characteristics of the teacher object (which extends the user object),
+ * including the constructors, getters, setters and toString method
+ */
+public class Teacher extends User {
     private String SchoolTitle;
 
-    public Teacher()
-    {
+    public Teacher() {
 
     }
 

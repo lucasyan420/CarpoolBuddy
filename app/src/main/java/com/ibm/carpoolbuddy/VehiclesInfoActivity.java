@@ -21,6 +21,9 @@ import com.google.firebase.firestore.QuerySnapshot;
 import java.lang.reflect.Array;
 import java.util.*;
 
+/**
+ * RecyclerView page showing the different characteristics of available rides
+ */
 public class VehiclesInfoActivity extends AppCompatActivity {
     RecyclerView recView;
     vehiclesAdapter myAdapter;
@@ -59,7 +62,7 @@ public class VehiclesInfoActivity extends AppCompatActivity {
         setContentView(R.layout.activity_vehicles_info);
 
         Bundle intentInfo = getIntent().getExtras();
-        if(intentInfo != null){
+        if (intentInfo != null) {
             currentUserType = intentInfo.getString("UserType");
             currentUserID = intentInfo.getString("UserID");
             currentUserName = intentInfo.getString("UserName");
@@ -70,14 +73,14 @@ public class VehiclesInfoActivity extends AppCompatActivity {
 
         vehicleDescriptions = new ArrayList();
 
-        try{
+        try {
 //            setOnClickListener();
             recView = findViewById(R.id.recyclerView_vehiclesInfoActivity);
             myAdapter = new vehiclesAdapter(vehicleLocations, vehicleDescriptions, vehiclePrices, vehicleSeatsLeft, vehicleIDs, listener, currentUserType, currentUserID, currentUserName);
             System.out.println("Testing adapter" + myAdapter.toString());
             recView.setAdapter(myAdapter);
             recView.setLayoutManager(new LinearLayoutManager(this));
-        } catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
@@ -106,14 +109,13 @@ public class VehiclesInfoActivity extends AppCompatActivity {
 //        };
 //    }
 
-    public void getCarDescription()
-    {
-        try{
+    public void getCarDescription() {
+        try {
             firestore.collection("AllObjects/AllVehicles/Cars").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                 @Override
                 public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                    if(task.isSuccessful()){
-                        for (QueryDocumentSnapshot document: task.getResult()){
+                    if (task.isSuccessful()) {
+                        for (QueryDocumentSnapshot document : task.getResult()) {
                             Log.d("Testing", document.getId() + " => " + document.getData());
                             vehicleIDs.add(document.getId());
 
@@ -132,18 +134,15 @@ public class VehiclesInfoActivity extends AppCompatActivity {
                             String vehicleCapacity = document.getData().get("capacity").toString();
                             vehicleSeatsLeft.add(vehicleCapacity);
 
-                            try{
+                            try {
                                 String vehicleLocation = document.getData().get("startingLocation").toString();
                                 vehicleLocations.add(vehicleLocation);
-                            }
-                            catch(Exception err)
-                            {
+                            } catch (Exception err) {
                                 err.printStackTrace();
                             }
                         }
 
-                        for(int i = 0; i < vehicleTypes.size(); i++)
-                        {
+                        for (int i = 0; i < vehicleTypes.size(); i++) {
                             System.out.println("Type: " + vehicleTypes.get(i) + ", Brand: " + vehicleBrands.get(i) + ", Model: " + vehicleModels.get(i));
                             System.out.println("Price " + vehiclePrices.get(i) + ", Seats Left: " + vehicleSeatsLeft.get(i));
                             vehicleDescriptions.add("Type: " + vehicleTypes.get(i) + ", Brand: " + vehicleBrands.get(i) + ", Model: " + vehicleModels.get(i));
@@ -165,25 +164,23 @@ public class VehiclesInfoActivity extends AppCompatActivity {
                         myAdapter.updateList(vehicleLocations, "startingLocations");
                         myAdapter.notifyDataSetChanged();
 
-                    }
-                    else{
+                    } else {
                         Log.d("Testing", "Error getting documents: ", task.getException());
                     }
                 }
             });
-        } catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-    public void getElectricCarDescription()
-    {
-        try{
+    public void getElectricCarDescription() {
+        try {
             firestore.collection("AllObjects/AllVehicles/ElectricCars").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                 @Override
                 public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                    if(task.isSuccessful()){
-                        for (QueryDocumentSnapshot document: task.getResult()){
+                    if (task.isSuccessful()) {
+                        for (QueryDocumentSnapshot document : task.getResult()) {
                             Log.d("Testing", document.getId() + " => " + document.getData());
                             vehicleIDs.add(document.getId());
 
@@ -202,18 +199,15 @@ public class VehiclesInfoActivity extends AppCompatActivity {
                             String vehicleCapacity = document.getData().get("capacity").toString();
                             vehicleSeatsLeft.add(vehicleCapacity);
 
-                            try{
+                            try {
                                 String vehicleLocation = document.getData().get("startingLocation").toString();
                                 vehicleLocations.add(vehicleLocation);
-                            }
-                            catch(Exception err)
-                            {
+                            } catch (Exception err) {
                                 err.printStackTrace();
                             }
                         }
 
-                        for(int i = 0; i < vehicleTypes.size(); i++)
-                        {
+                        for (int i = 0; i < vehicleTypes.size(); i++) {
                             System.out.println("Type: " + vehicleTypes.get(i) + ", Brand: " + vehicleBrands.get(i) + ", Model: " + vehicleModels.get(i));
                             System.out.println("Price " + vehiclePrices.get(i) + ", Seats Left: " + vehicleSeatsLeft.get(i));
                             vehicleDescriptions.add("Type: " + vehicleTypes.get(i) + ", Brand: " + vehicleBrands.get(i) + ", Model: " + vehicleModels.get(i));
@@ -233,25 +227,23 @@ public class VehiclesInfoActivity extends AppCompatActivity {
                         myAdapter.updateList(vehicleSeatsLeft, "seatsLeft");
                         myAdapter.updateList(vehicleLocations, "startingLocations");
                         myAdapter.notifyDataSetChanged();
-                    }
-                    else{
+                    } else {
                         Log.d("Testing", "Error getting documents: ", task.getException());
                     }
                 }
             });
-        } catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-    public void getMotorcycleDescription()
-    {
-        try{
+    public void getMotorcycleDescription() {
+        try {
             firestore.collection("AllObjects/AllVehicles/Motorcycle").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                 @Override
                 public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                    if(task.isSuccessful()){
-                        for (QueryDocumentSnapshot document: task.getResult()){
+                    if (task.isSuccessful()) {
+                        for (QueryDocumentSnapshot document : task.getResult()) {
                             Log.d("Testing", document.getId() + " => " + document.getData());
                             vehicleIDs.add(document.getId());
 
@@ -270,18 +262,15 @@ public class VehiclesInfoActivity extends AppCompatActivity {
                             String vehicleCapacity = document.getData().get("capacity").toString();
                             vehicleSeatsLeft.add(vehicleCapacity);
 
-                            try{
+                            try {
                                 String vehicleLocation = document.getData().get("startingLocation").toString();
                                 vehicleLocations.add(vehicleLocation);
-                            }
-                            catch(Exception err)
-                            {
+                            } catch (Exception err) {
                                 err.printStackTrace();
                             }
                         }
 
-                        for(int i = 0; i < vehicleTypes.size(); i++)
-                        {
+                        for (int i = 0; i < vehicleTypes.size(); i++) {
                             System.out.println("Type: " + vehicleTypes.get(i) + ", Brand: " + vehicleBrands.get(i) + ", Model: " + vehicleModels.get(i));
                             System.out.println("Price " + vehiclePrices.get(i) + ", Seats Left: " + vehicleSeatsLeft.get(i));
                             vehicleDescriptions.add("Type: " + vehicleTypes.get(i) + ", Brand: " + vehicleBrands.get(i) + ", Model: " + vehicleModels.get(i));
@@ -302,19 +291,17 @@ public class VehiclesInfoActivity extends AppCompatActivity {
                         myAdapter.updateList(vehicleSeatsLeft, "seatsLeft");
                         myAdapter.updateList(vehicleLocations, "startingLocations");
                         myAdapter.notifyDataSetChanged();
-                    }
-                    else{
+                    } else {
                         Log.d("Testing", "Error getting documents: ", task.getException());
                     }
                 }
             });
-        } catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-    public void goBack(View v)
-    {
+    public void goBack(View v) {
         Intent goBackIntent = new Intent(this, MainActivity.class);
         goBackIntent.putExtra("UserType", currentUserType);
         goBackIntent.putExtra("UserID", currentUserID);

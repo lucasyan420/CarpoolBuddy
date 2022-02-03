@@ -18,6 +18,9 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import java.util.ArrayList;
 import java.util.UUID;
 
+/**
+ * This class is for users to create an alumni account for later log in
+ */
 public class AlumniSignUpActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private FirebaseFirestore firestore;
@@ -44,8 +47,13 @@ public class AlumniSignUpActivity extends AppCompatActivity {
         passwordEditText = findViewById(R.id.passwordEditText_alumniSignUpActivity);
     }
 
-    public void signUp(View v)
-    {
+    /**
+     * Users enter parameters for their alumni characteristics, and using FirebaseAuth, the program
+     * creates an alumni object with the inputted characteristics (including email and password)
+     * before adding the object to the database of all users
+     * @param v
+     */
+    public void signUp(View v) {
         System.out.println("Sign up test");
         String nameString = nameEditText.getText().toString();
         String graduationYear = graduationYearEditText.getText().toString();
@@ -56,7 +64,7 @@ public class AlumniSignUpActivity extends AppCompatActivity {
         mAuth.createUserWithEmailAndPassword(emailString, passwordString).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
-                if(task.isSuccessful()){
+                if (task.isSuccessful()) {
                     Log.d("Test", "Successfully signed up the user");
 
                     Alumni alumni = new Alumni(UUID.randomUUID().toString(), nameString, emailString, "Alumni", 1, ownedVehicles, bookedVehicles, 0, graduationYear);
@@ -69,20 +77,22 @@ public class AlumniSignUpActivity extends AppCompatActivity {
                     }
                     Log.d("Test", "Test3");
                     goBack();
-                }
-                else {
+                } else {
                     Log.w("Test", "createUserWithEmail:failure", task.getException());
                 }
             }
         });
     }
 
-    public void goBack(){
+    /**
+     * Goes back to SignUpProfile Activity
+     */
+    public void goBack() {
         Intent goBackIntent = new Intent(this, SignUpProfile.class);
         startActivity(goBackIntent);
     }
 
-    public void goBack(View v){
+    public void goBack(View v) {
         Intent goBackIntent = new Intent(this, SignUpProfile.class);
         startActivity(goBackIntent);
     }

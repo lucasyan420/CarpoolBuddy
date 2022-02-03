@@ -1,6 +1,12 @@
 package com.ibm.carpoolbuddy;
+
 import java.util.*;
 
+/**
+ * This is the vehicle class which creates the car object with its characteristics, and includes
+ * constructor, getters, setters and toString. Overarching class which encompasses the car,
+ * motorcycle and electric car objects
+ */
 public class Vehicle {
     private String ownerID;
     private String ownerName;
@@ -14,8 +20,7 @@ public class Vehicle {
     private double basePrice;
     private String startingLocation;
 
-    public Vehicle()
-    {
+    public Vehicle() {
 
     }
 
@@ -50,9 +55,13 @@ public class Vehicle {
         this.ownerName = ownerName;
     }
 
-    public String getBrand() { return brand; }
+    public String getBrand() {
+        return brand;
+    }
 
-    public void setBrand(String brand) { this.brand = brand; }
+    public void setBrand(String brand) {
+        this.brand = brand;
+    }
 
     public String getModel() {
         return model;

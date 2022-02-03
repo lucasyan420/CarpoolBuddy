@@ -2,11 +2,14 @@ package com.ibm.carpoolbuddy;
 
 import java.util.ArrayList;
 
-public class Alumni extends User{
+/**
+ * This class details the characteristics of the alumni object (which extends the user object),
+ * including the constructors, getters, setters and toString method
+ */
+public class Alumni extends User {
     private String graduateYear;
 
-    public Alumni()
-    {
+    public Alumni() {
 
     }
 

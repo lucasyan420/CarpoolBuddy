@@ -2,12 +2,15 @@ package com.ibm.carpoolbuddy;
 
 import java.util.ArrayList;
 
-public class Motorcycle extends Vehicle{
+/**
+ * This is the motorcycle class which creates the car object with its characteristics, and includes
+ * constructor, getters, setters and toString. Extends vehicle class
+ */
+public class Motorcycle extends Vehicle {
     private int weight;
     private int length;
 
-    public Motorcycle()
-    {
+    public Motorcycle() {
 
     }
 

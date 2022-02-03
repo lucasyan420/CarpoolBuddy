@@ -38,6 +38,9 @@ public class UserProfileActivity extends AppCompatActivity {
     private ArrayList<String> ownedVehicles;
     private ArrayList<String> bookedRides;
 
+    /** Displays user information
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,8 +54,7 @@ public class UserProfileActivity extends AppCompatActivity {
         bookedRidesTextView = findViewById(R.id.bookedRidesTextView_userProfileActivity);
 
         Bundle intentInfo = getIntent().getExtras();
-        if(intentInfo != null)
-        {
+        if (intentInfo != null) {
             nameString = intentInfo.getString("UserName");
             typeString = intentInfo.getString("UserType");
             userIDString = intentInfo.getString("UserID");
@@ -67,17 +69,18 @@ public class UserProfileActivity extends AppCompatActivity {
 //        bookedRidesTextView.setText(bookedRides.toString());
     }
 
-    public void updateUserInfo()
-    {
+    /**
+     * Given user id, his/her email, ownedVehicles, bookedRides and other characteristics are
+     * found and displayed on page
+     */
+    public void updateUserInfo() {
         System.out.println(typeString);
-        try{
-            if(typeString.equals("student"))
-            {
+        try {
+            if (typeString.equals("student")) {
                 firestore.collection("AllObjects/AllUsers/students").document(userIDString).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                     @Override
                     public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                        if(task.isSuccessful())
-                        {
+                        if (task.isSuccessful()) {
                             DocumentSnapshot ds = task.getResult();
                             Student currStudent = ds.toObject(Student.class);
 
@@ -86,25 +89,20 @@ public class UserProfileActivity extends AppCompatActivity {
                             bookedRides = currStudent.getBookedVehicles();
 
                             emailTextView.setText(emailString);
-                            for(String vehicles: ownedVehicles)
-                            {
+                            for (String vehicles : ownedVehicles) {
                                 ownedVehiclesTextView.append(vehicles);
                             }
-                            for(String rides: bookedRides)
-                            {
+                            for (String rides : bookedRides) {
                                 bookedRidesTextView.append(rides);
                             }
                         }
                     }
                 });
-            }
-            else if(typeString.equals("parent"))
-            {
+            } else if (typeString.equals("parent")) {
                 firestore.collection("AllObjects/AllUsers/parents").document(userIDString).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                     @Override
                     public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                        if(task.isSuccessful())
-                        {
+                        if (task.isSuccessful()) {
                             DocumentSnapshot ds = task.getResult();
                             Student currStudent = ds.toObject(Student.class);
 
@@ -113,25 +111,20 @@ public class UserProfileActivity extends AppCompatActivity {
                             bookedRides = currStudent.getBookedVehicles();
 
                             emailTextView.setText(emailString);
-                            for(String vehicles: ownedVehicles)
-                            {
+                            for (String vehicles : ownedVehicles) {
                                 ownedVehiclesTextView.append(vehicles);
                             }
-                            for(String rides: bookedRides)
-                            {
+                            for (String rides : bookedRides) {
                                 bookedRidesTextView.append(rides);
                             }
                         }
                     }
                 });
-            }
-            else if(typeString.equals("alumni"))
-            {
+            } else if (typeString.equals("alumni")) {
                 firestore.collection("AllObjects/AllUsers/alums").document(userIDString).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                     @Override
                     public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                        if(task.isSuccessful())
-                        {
+                        if (task.isSuccessful()) {
                             DocumentSnapshot ds = task.getResult();
                             Student currStudent = ds.toObject(Student.class);
 
@@ -140,25 +133,20 @@ public class UserProfileActivity extends AppCompatActivity {
                             bookedRides = currStudent.getBookedVehicles();
 
                             emailTextView.setText(emailString);
-                            for(String vehicles: ownedVehicles)
-                            {
+                            for (String vehicles : ownedVehicles) {
                                 ownedVehiclesTextView.append(vehicles);
                             }
-                            for(String rides: bookedRides)
-                            {
+                            for (String rides : bookedRides) {
                                 bookedRidesTextView.append(rides);
                             }
                         }
                     }
                 });
-            }
-            else if(typeString.equals("teacher"))
-            {
+            } else if (typeString.equals("teacher")) {
                 firestore.collection("AllObjects/AllUsers/teachers").document(userIDString).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                     @Override
                     public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                        if(task.isSuccessful())
-                        {
+                        if (task.isSuccessful()) {
                             DocumentSnapshot ds = task.getResult();
                             Student currStudent = ds.toObject(Student.class);
 
@@ -167,27 +155,25 @@ public class UserProfileActivity extends AppCompatActivity {
                             bookedRides = currStudent.getBookedVehicles();
 
                             emailTextView.setText(emailString);
-                            for(String vehicles: ownedVehicles)
-                            {
+                            for (String vehicles : ownedVehicles) {
                                 ownedVehiclesTextView.append(vehicles);
                             }
-                            for(String rides: bookedRides)
-                            {
+                            for (String rides : bookedRides) {
                                 bookedRidesTextView.append(rides);
                             }
                         }
                     }
                 });
             }
-        }
-        catch(Exception err)
-        {
+        } catch (Exception err) {
             err.printStackTrace();
         }
     }
 
-    public void goBack(View v)
-    {
+    /** Goes back to main activity
+     * @param v
+     */
+    public void goBack(View v) {
         Intent goBackIntent = new Intent(this, MainActivity.class);
         goBackIntent.putExtra("UserType", typeString);
         goBackIntent.putExtra("UserName", nameString);

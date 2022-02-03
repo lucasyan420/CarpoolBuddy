@@ -52,7 +52,7 @@
         android:layout_height="50dp"
         android:layout_marginEnd="40dp"
         android:layout_marginBottom="100dp"
-        android:onClick="signUp"
+        android:onClick="goToCISAuthentication"
         android:text="Sign Up"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
@@ -63,8 +63,18 @@
         android:layout_height="50dp"
         android:layout_marginStart="40dp"
         android:layout_marginBottom="100dp"
-        android:onClick="test"
         android:text="Test"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/whyCarpoolButton_authActivity"
+        android:layout_width="200dp"
+        android:layout_height="80dp"
+        android:layout_marginTop="50dp"
+        android:onClick="goToWhyCarpool"
+        android:text="Why Carpool?"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

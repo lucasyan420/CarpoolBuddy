@@ -7,6 +7,7 @@
         <entry key="app/src/main/res/layout/activity_add_vehicle.xml" value="0.2365496049724021" />
         <entry key="app/src/main/res/layout/activity_alumni_sign_up.xml" value="0.35361672647814474" />
         <entry key="app/src/main/res/layout/activity_auth.xml" value="0.26998049819438347" />
+        <entry key="app/src/main/res/layout/activity_cisauthentication.xml" value="0.14583333333333334" />
         <entry key="app/src/main/res/layout/activity_lucky_reward.xml" value="0.2341485507246377" />
         <entry key="app/src/main/res/layout/activity_lucky_wheel.xml" value="0.39354310420107685" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.23790513243121056" />
@@ -19,9 +20,13 @@
         <entry key="app/src/main/res/layout/activity_user_profile.xml" value="0.2418478260869565" />
         <entry key="app/src/main/res/layout/activity_vehicle_profile.xml" value="0.2425258757544002" />
         <entry key="app/src/main/res/layout/activity_vehicles_info.xml" value="0.2418478260869565" />
+        <entry key="app/src/main/res/layout/activity_why_carpool.xml" value="0.2341485507246377" />
         <entry key="app/src/main/res/layout/vehicles_row_view.xml" value="0.3837590045841519" />
       </map>
     </option>
+  </component>
+  <component name="JavadocGenerationManager">
+    <option name="OUTPUT_DIRECTORY" value="$PROJECT_DIR$/app" />
   </component>
   <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />

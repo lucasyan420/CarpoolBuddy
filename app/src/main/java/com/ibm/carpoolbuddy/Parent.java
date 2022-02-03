@@ -1,11 +1,15 @@
 package com.ibm.carpoolbuddy;
+
 import java.util.*;
 
-public class Parent extends User{
+/**
+ * This class details the characteristics of the parent object (which extends the user object),
+ * including the constructors, getters, setters and toString method
+ */
+public class Parent extends User {
     private ArrayList<String> childrenUIDs;
 
-    public Parent()
-    {
+    public Parent() {
 
     }
 

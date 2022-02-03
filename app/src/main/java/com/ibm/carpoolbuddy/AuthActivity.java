@@ -22,6 +22,10 @@ import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.UUID;
 
+/**
+ * This class allows users to log in (using email and password) to the app using their previously
+ * created user account.
+ */
 public class AuthActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private FirebaseFirestore firestore;
@@ -48,8 +52,14 @@ public class AuthActivity extends AppCompatActivity {
         passwordEditText = findViewById(R.id.passwordEditText_authActivity);
     }
 
-    public void logIn(View v)
-    {
+    /**
+     * Users enter password and email and click on log in button. If password and email matches
+     * one previously created, FirebaseAuth allows the user to sign in and the user's
+     * characteristics are found and passed along each new intent. If the password or email is
+     * wrong, user can't sign in and a message appears telling user that email/password is wrong
+     * @param v
+     */
+    public void logIn(View v) {
         System.out.println("Log in test");
         String emailString = emailEditText.getText().toString();
         String passwordString = passwordEditText.getText().toString();
@@ -59,7 +69,7 @@ public class AuthActivity extends AppCompatActivity {
         mAuth.signInWithEmailAndPassword(emailString, passwordString).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
-                if(task.isSuccessful()) {
+                if (task.isSuccessful()) {
                     Log.d("LOG IN", "Successfully logged in the user");
 
 //                    FirebaseUser user = mAuth.getCurrentUser();
@@ -67,9 +77,9 @@ public class AuthActivity extends AppCompatActivity {
                     System.out.println("Test: " + id);
                     findUser();
 //                    updateUI(user);
-                }
-                else {
+                } else {
                     Log.w("LOG IN", "signInWithEmail:failure", task.getException());
+                    Toast.makeText(getApplicationContext(), "Wrong username or password", Toast.LENGTH_LONG).show();
                     updateUI(null);
                 }
             }
@@ -85,37 +95,39 @@ public class AuthActivity extends AppCompatActivity {
 //                System.out.println("Third test: " + id);
 //            }
 //        });
-        // firestore.collection("AllObjects/AllUsers/students").document(mAuth.getCurrentUser().getUid()).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-        // @Override
-        // public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-        // if(task.isSuccessful() && task.getResult() != null){
-        //    String userId = task.getResult().getString("uid");
-        //    System.out.println("Second test: " + userId);
-        // }
-        // else{
-        //    Log.d("Fail", "Fail");
-        // }
-        // }
-        // });
+    // firestore.collection("AllObjects/AllUsers/students").document(mAuth.getCurrentUser().getUid()).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+    // @Override
+    // public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+    // if(task.isSuccessful() && task.getResult() != null){
+    //    String userId = task.getResult().getString("uid");
+    //    System.out.println("Second test: " + userId);
+    // }
+    // else{
+    //    Log.d("Fail", "Fail");
+    // }
+    // }
+    // });
 //    }
 
-    synchronized public void findUser(){
+    /**
+     * Goes through the different collections under user objects (student, parent, teacher, alumni)
+     * to find the user, and once user is found, his/her user type, id and name are saved
+     */
+    synchronized public void findUser() {
         findUserInStudent();
         findUserInParent();
         findUserInAlumni();
         findUserInTeacher();
     }
 
-    public void findUserInStudent()
-    {
-        try{
+    public void findUserInStudent() {
+        try {
             String currentEmail = mAuth.getCurrentUser().getEmail();
             firestore.collection("AllObjects/AllUsers/students").whereEqualTo("email", currentEmail).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                 @Override
                 public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                    if(task.isSuccessful())
-                    {
-                        try{
+                    if (task.isSuccessful()) {
+                        try {
                             currentUserID = task.getResult().getDocuments().get(0).getId();
                             currentUserType = "student";
 
@@ -130,35 +142,29 @@ public class AuthActivity extends AppCompatActivity {
                                     updateUI(user);
                                 }
                             });
-                        }
-                        catch(Exception e)
-                        {
+                        } catch (Exception e) {
                             e.printStackTrace();
                         }
                         System.out.println("User type is " + currentUserType);
                         System.out.println("Fourth test: " + currentUserID);
-                    }
-                    else{
+                    } else {
                         Log.d("Fail", "User not a student");
                     }
                 }
             });
-        }
-        catch(Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-    public void findUserInParent()
-    {
-        try{
+    public void findUserInParent() {
+        try {
             String currentEmail = mAuth.getCurrentUser().getEmail();
             firestore.collection("AllObjects/AllUsers/parents").whereEqualTo("email", currentEmail).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                 @Override
                 public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                    if(task.isSuccessful())
-                    {
-                        try{
+                    if (task.isSuccessful()) {
+                        try {
                             currentUserID = task.getResult().getDocuments().get(0).getId();
                             currentUserType = "parent";
 
@@ -173,36 +179,30 @@ public class AuthActivity extends AppCompatActivity {
                                     updateUI(user);
                                 }
                             });
-                        }
-                        catch(Exception e)
-                        {
+                        } catch (Exception e) {
                             e.printStackTrace();
                         }
                         System.out.println("User type is " + currentUserType);
                         System.out.println("Fourth test: " + currentUserID);
 
-                    }
-                    else{
+                    } else {
                         Log.d("Fail", "User not a parent");
                     }
                 }
             });
-        }
-        catch(Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-    public void findUserInAlumni()
-    {
-        try{
+    public void findUserInAlumni() {
+        try {
             String currentEmail = mAuth.getCurrentUser().getEmail();
             firestore.collection("AllObjects/AllUsers/alums").whereEqualTo("email", currentEmail).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                 @Override
                 public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                    if(task.isSuccessful())
-                    {
-                        try{
+                    if (task.isSuccessful()) {
+                        try {
                             currentUserID = task.getResult().getDocuments().get(0).getId();
                             currentUserType = "alumni";
 
@@ -217,35 +217,29 @@ public class AuthActivity extends AppCompatActivity {
                                     updateUI(user);
                                 }
                             });
-                        }
-                        catch(Exception e)
-                        {
+                        } catch (Exception e) {
                             e.printStackTrace();
                         }
                         System.out.println("User type is " + currentUserType);
                         System.out.println("Fourth test: " + currentUserID);
-                    }
-                    else{
+                    } else {
                         Log.d("Fail", "User not an alum");
                     }
                 }
             });
-        }
-        catch(Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-    public void findUserInTeacher()
-    {
-        try{
+    public void findUserInTeacher() {
+        try {
             String currentEmail = mAuth.getCurrentUser().getEmail();
             firestore.collection("AllObjects/AllUsers/teachers").whereEqualTo("email", currentEmail).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                 @Override
                 public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                    if(task.isSuccessful())
-                    {
-                        try{
+                    if (task.isSuccessful()) {
+                        try {
                             currentUserID = task.getResult().getDocuments().get(0).getId();
                             currentUserType = "teacher";
 
@@ -261,54 +255,66 @@ public class AuthActivity extends AppCompatActivity {
                                     updateUI(user);
                                 }
                             });
-                        }
-                        catch(Exception e)
-                        {
+                        } catch (Exception e) {
                             e.printStackTrace();
                         }
                         System.out.println("User type is " + currentUserType);
                         System.out.println("Fourth test: " + currentUserID);
-                    }
-                    else{
+                    } else {
                         Log.d("Fail", "User not a teacher");
                     }
                 }
             });
-        }
-        catch(Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-    public void signUp(View v)
-    {
-        Intent goToSignUpProfileIntent = new Intent(this, SignUpProfile.class);
-        startActivity(goToSignUpProfileIntent);
+    /**
+     * When button is clicked to create account, page goes to CISAuthentication activity
+     * @param v
+     */
+    public void goToCISAuthentication(View v) {
+        Intent goToCISAuthenticationIntent = new Intent(this, CISAuthenticationActivity.class);
+        startActivity(goToCISAuthenticationIntent);
+        finish();
     }
 
-    public void logOut(View v)
-    {
+    public void logOut(View v) {
         System.out.println("Log out test");
         FirebaseAuth.getInstance().signOut();
         finish();
     }
 
-    public void updateUI(FirebaseUser currentUser)
-    {
-        if(currentUser != null)
-        {
+    /**
+     * When correct username and password is inputted, users enter the main page of the app.
+     * User type, id and name are passed along to the main page. If username/password is wrong,
+     * the log in page is refreshsed and message indicating error is displayed
+     * @param currentUser
+     */
+    public void updateUI(FirebaseUser currentUser) {
+        if (currentUser != null) {
             Intent updateUIIntent = new Intent(this, MainActivity.class);
             updateUIIntent.putExtra("UserType", currentUserType);
             updateUIIntent.putExtra("UserID", currentUserID);
             updateUIIntent.putExtra("UserName", currentUserName);
             System.out.println("tee" + currentUserName);
             startActivity(updateUIIntent);
-        }
-        else
-        {
+        } else {
+            Toast.makeText(getApplicationContext(), "Wrong email or password", Toast.LENGTH_SHORT);
             Intent refreshUIIntent = new Intent(this, AuthActivity.class);
             startActivity(refreshUIIntent);
         }
+    }
+
+    /**
+     * On button onclick, page turns to the WhyCarpoolActivity
+     * @param v
+     */
+    public void goToWhyCarpool(View v) {
+        Intent goToWhyCarpoolIntent = new Intent(this, WhyCarpoolActivity.class);
+        startActivity(goToWhyCarpoolIntent);
+        finish();
     }
 
 //    public void test(View v)

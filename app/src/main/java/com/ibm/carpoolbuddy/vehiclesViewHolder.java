@@ -9,7 +9,10 @@ import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
-public class vehiclesViewHolder extends RecyclerView.ViewHolder{
+/**
+ * View holder for each ride
+ */
+public class vehiclesViewHolder extends RecyclerView.ViewHolder {
     protected TextView locationText;
     protected TextView descriptionText;
     protected TextView priceText;
@@ -24,7 +27,7 @@ public class vehiclesViewHolder extends RecyclerView.ViewHolder{
         seatsLeftText = itemView.findViewById(R.id.seatsLeftTextView_vehiclesRowView);
     }
 
-    public void goToVehicleProfileActivity(View v){
+    public void goToVehicleProfileActivity(View v) {
         v.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -33,8 +36,7 @@ public class vehiclesViewHolder extends RecyclerView.ViewHolder{
         });
     }
 
-    public ConstraintLayout getLayout()
-    {
+    public ConstraintLayout getLayout() {
         return itemView.findViewById(R.id.rowLayout);
     }
 }
